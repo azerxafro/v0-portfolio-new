@@ -9,6 +9,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import {
+<<<<<<< Updated upstream
+=======
+  Play,
+>>>>>>> Stashed changes
   ExternalLink,
   Github,
   Calendar,
@@ -18,10 +22,13 @@ import {
   LinkIcon,
   Filter,
   ArrowUpRight,
+<<<<<<< Updated upstream
   Youtube,
   FileImage,
   FileVideo,
   Loader2,
+=======
+>>>>>>> Stashed changes
 } from "lucide-react"
 
 // Project type definition with YouTube and Google Drive support
@@ -61,9 +68,12 @@ export default function Portfolio() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [showFilters, setShowFilters] = useState(false)
   const [hoveredProject, setHoveredProject] = useState<number | null>(null)
+<<<<<<< Updated upstream
   const [activeTab, setActiveTab] = useState("overview")
   const [isLoading, setIsLoading] = useState(false)
   const [currentGDriveFile, setCurrentGDriveFile] = useState<string | null>(null)
+=======
+>>>>>>> Stashed changes
 
   // Parallax effect for section
   const { scrollYProgress } = useScroll({
@@ -222,6 +232,17 @@ export default function Portfolio() {
     setTimeout(() => setIsLoading(false), 1000) // Simulate loading
   }
 
+  // Auto-rotate images in the modal
+  useEffect(() => {
+    if (!selectedProject) return
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev === selectedProject.images.length - 1 ? 0 : prev + 1))
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [selectedProject])
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -255,8 +276,13 @@ export default function Portfolio() {
     <section id="portfolio" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-black py-20">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
+<<<<<<< Updated upstream
         <div className="absolute -left-20 top-20 h-64 w-64 rounded-full bg-purple-500/20 blur-3xl"></div>
         <div className="absolute -right-20 bottom-40 h-64 w-64 rounded-full bg-purple-500/20 blur-3xl"></div>
+=======
+        <div className="absolute -left-20 top-20 h-64 w-64 rounded-full bg-text-accent/20 blur-3xl"></div>
+        <div className="absolute -right-20 bottom-40 h-64 w-64 rounded-full bg-text-accent/20 blur-3xl"></div>
+>>>>>>> Stashed changes
       </div>
 
       <motion.div ref={containerRef} style={{ y }} className="relative z-10">
@@ -269,7 +295,11 @@ export default function Portfolio() {
           >
             <h2 className="relative inline-block mb-8 text-3xl font-bold tracking-tighter sm:text-4xl">
               Portfolio
+<<<<<<< Updated upstream
               <span className="absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded bg-purple-500"></span>
+=======
+              <span className="absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded bg-text-accent"></span>
+>>>>>>> Stashed changes
             </h2>
             <p className="mb-12 text-text-secondary">
               Browse through my selected works across different categories. Each project represents a unique creative
@@ -282,7 +312,11 @@ export default function Portfolio() {
             <Button
               variant="outline"
               onClick={() => setShowFilters(!showFilters)}
+<<<<<<< Updated upstream
               className="inline-flex items-center gap-2 border-purple-500/30 bg-zinc-800/50 text-text-secondary backdrop-blur-sm hover:bg-zinc-800 hover:text-text-primary"
+=======
+              className="inline-flex items-center gap-2 border-text-accent/30 bg-zinc-800/50 text-text-secondary backdrop-blur-sm hover:bg-zinc-800 hover:text-text-primary"
+>>>>>>> Stashed changes
             >
               <Filter className="h-4 w-4" />
               {showFilters ? "Hide Filters" : "Show Filters"}
@@ -306,8 +340,13 @@ export default function Portfolio() {
                     onClick={() => setSelectedCategory(category)}
                     className={`text-sm capitalize ${
                       selectedCategory === category
+<<<<<<< Updated upstream
                         ? "bg-gradient-to-r from-purple-700 to-purple-500 text-black font-medium border-transparent"
                         : "text-text-secondary hover:text-purple-400 hover:border-purple-500/30"
+=======
+                        ? "bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white border-transparent"
+                        : "text-text-secondary hover:text-text-primary hover:border-[#5416B4]/30"
+>>>>>>> Stashed changes
                     }`}
                   >
                     {category}
@@ -327,14 +366,23 @@ export default function Portfolio() {
                   onClick={() => setSelectedCategory(category)}
                   className={`relative overflow-hidden text-sm capitalize ${
                     selectedCategory === category
+<<<<<<< Updated upstream
                       ? "bg-gradient-to-r from-purple-700 to-purple-500 text-white border-transparent"
                       : "text-text-secondary hover:text-purple-400 hover:border-purple-500/30"
+=======
+                      ? "bg-text-accent text-black border-text-accent"
+                      : "text-text-secondary hover:text-text-accent hover:border-text-accent"
+>>>>>>> Stashed changes
                   }`}
                 >
                   {selectedCategory === category && (
                     <motion.span
                       layoutId="activeCategory"
+<<<<<<< Updated upstream
                       className="absolute inset-0 bg-gradient-to-r from-purple-700 to-purple-500"
+=======
+                      className="absolute inset-0 bg-text-accent"
+>>>>>>> Stashed changes
                       initial={false}
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
@@ -363,7 +411,11 @@ export default function Portfolio() {
                   onMouseEnter={() => setHoveredProject(project.id)}
                   onMouseLeave={() => setHoveredProject(null)}
                 >
+<<<<<<< Updated upstream
                   <Card className="relative h-full overflow-hidden rounded-xl border-zinc-800 bg-zinc-800/30 backdrop-blur-sm transition-all duration-500 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/5">
+=======
+                  <Card className="relative h-full overflow-hidden rounded-xl border-zinc-800 bg-zinc-800/30 backdrop-blur-sm transition-all duration-500 hover:border-text-accent/30 hover:shadow-lg hover:shadow-text-accent/5">
+>>>>>>> Stashed changes
                     <CardContent className="p-0">
                       <div className="relative overflow-hidden">
                         {/* Project Thumbnail */}
@@ -380,6 +432,7 @@ export default function Portfolio() {
                           />
                         </div>
 
+<<<<<<< Updated upstream
                         {/* Media Type Indicators */}
                         <div className="absolute right-3 top-3 flex gap-2">
                           {project.youtubeId && (
@@ -398,6 +451,12 @@ export default function Portfolio() {
                         <Badge
                           variant="outline"
                           className="absolute left-3 top-3 bg-black/50 text-purple-400 backdrop-blur-sm"
+=======
+                        {/* Category Badge */}
+                        <Badge
+                          variant="outline"
+                          className="absolute left-3 top-3 bg-black/50 text-text-accent backdrop-blur-sm"
+>>>>>>> Stashed changes
                         >
                           {project.category}
                         </Badge>
@@ -445,7 +504,11 @@ export default function Portfolio() {
                             <Button
                               variant="outline"
                               size="sm"
+<<<<<<< Updated upstream
                               className="bg-gradient-to-r from-purple-700 to-purple-500 text-white hover:opacity-90"
+=======
+                              className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
+>>>>>>> Stashed changes
                               onClick={() => openProjectDetails(project)}
                             >
                               <Info className="mr-2 h-4 w-4" /> View Details
@@ -462,7 +525,11 @@ export default function Portfolio() {
                             whileHover={{ scale: 1.1, rotate: 45 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => openProjectDetails(project)}
+<<<<<<< Updated upstream
                             className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-700/50 text-purple-400 transition-colors hover:bg-purple-500/20"
+=======
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-700/50 text-text-accent transition-colors hover:bg-text-accent/20"
+>>>>>>> Stashed changes
                           >
                             <ArrowUpRight className="h-4 w-4" />
                           </motion.button>
@@ -518,6 +585,7 @@ export default function Portfolio() {
             <>
               {/* Image Gallery or Media Preview */}
               <div className="relative aspect-video w-full overflow-hidden">
+<<<<<<< Updated upstream
                 {activeTab === "overview" && (
                   <AnimatePresence mode="wait">
                     <motion.img
@@ -532,6 +600,20 @@ export default function Portfolio() {
                     />
                   </AnimatePresence>
                 )}
+=======
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentImageIndex}
+                    src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
+                    alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                    className="h-full w-full object-cover"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </AnimatePresence>
+>>>>>>> Stashed changes
 
                 {activeTab === "youtube" && selectedProject.youtubeId && (
                   <iframe
@@ -566,7 +648,11 @@ export default function Portfolio() {
                   <>
                     <motion.button
                       onClick={prevImage}
+<<<<<<< Updated upstream
                       className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-purple-500 hover:text-black"
+=======
+                      className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-text-accent hover:text-black"
+>>>>>>> Stashed changes
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       aria-label="Previous image"
@@ -575,7 +661,11 @@ export default function Portfolio() {
                     </motion.button>
                     <motion.button
                       onClick={nextImage}
+<<<<<<< Updated upstream
                       className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-purple-500 hover:text-black"
+=======
+                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-text-accent hover:text-black"
+>>>>>>> Stashed changes
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       aria-label="Next image"
@@ -590,7 +680,11 @@ export default function Portfolio() {
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
                           className={`h-2 w-8 rounded-full transition-all ${
+<<<<<<< Updated upstream
                             index === currentImageIndex ? "bg-purple-500" : "bg-white/30"
+=======
+                            index === currentImageIndex ? "bg-text-accent" : "bg-white/30"
+>>>>>>> Stashed changes
                           }`}
                           aria-label={`Go to image ${index + 1}`}
                         />
@@ -610,7 +704,11 @@ export default function Portfolio() {
                           href={selectedProject.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
+<<<<<<< Updated upstream
                           className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-purple-700 to-purple-500 px-3 py-1 text-sm text-white transition-opacity hover:opacity-90"
+=======
+                          className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-[#5416B4] to-[#7027C3] px-3 py-1 text-sm text-white transition-opacity hover:opacity-90"
+>>>>>>> Stashed changes
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
@@ -660,6 +758,7 @@ export default function Portfolio() {
 
                       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
+<<<<<<< Updated upstream
                           <h4 className="mb-2 text-sm font-medium text-purple-400">Role</h4>
                           <p className="text-text-secondary">{selectedProject.role}</p>
                         </div>
@@ -673,6 +772,21 @@ export default function Portfolio() {
                         </div>
                         <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
                           <h4 className="mb-2 text-sm font-medium text-purple-400">Duration</h4>
+=======
+                          <h4 className="mb-2 text-sm font-medium text-text-accent">Role</h4>
+                          <p className="text-text-secondary">{selectedProject.role}</p>
+                        </div>
+                        <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
+                          <h4 className="mb-2 text-sm font-medium text-text-accent">Client</h4>
+                          <p className="text-text-secondary">{selectedProject.client}</p>
+                        </div>
+                        <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
+                          <h4 className="mb-2 text-sm font-medium text-text-accent">Year</h4>
+                          <p className="text-text-secondary">{selectedProject.year}</p>
+                        </div>
+                        <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
+                          <h4 className="mb-2 text-sm font-medium text-text-accent">Duration</h4>
+>>>>>>> Stashed changes
                           <p className="text-text-secondary">{selectedProject.duration}</p>
                         </div>
                       </div>
@@ -686,7 +800,11 @@ export default function Portfolio() {
                         <h4 className="mb-3 text-lg font-medium text-text-heading">Technologies Used</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedProject.technologies.map((tech, index) => (
+<<<<<<< Updated upstream
                             <Badge key={index} className="bg-purple-500/10 text-purple-400">
+=======
+                            <Badge key={index} className="bg-text-accent/10 text-text-accent">
+>>>>>>> Stashed changes
                               {tech}
                             </Badge>
                           ))}
@@ -776,7 +894,11 @@ export default function Portfolio() {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: index * 0.1 }}
                         >
+<<<<<<< Updated upstream
                           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500/20 text-xs font-medium text-purple-400">
+=======
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-text-accent/20 text-xs font-medium text-text-accent">
+>>>>>>> Stashed changes
                             {index + 1}
                           </span>
                           <span className="text-text-secondary">{feature}</span>
@@ -784,6 +906,30 @@ export default function Portfolio() {
                       ))}
                     </ul>
                   </TabsContent>
+<<<<<<< Updated upstream
+=======
+
+                  {/* Video Tab */}
+                  {selectedProject.video && (
+                    <TabsContent value="video" className="mt-4">
+                      <div className="aspect-video overflow-hidden rounded-lg bg-zinc-800">
+                        <div className="flex h-full flex-col items-center justify-center p-6 text-center">
+                          <Play className="mb-4 h-12 w-12 text-text-accent opacity-80" />
+                          <h4 className="mb-2 text-lg font-medium text-text-heading">Project Video</h4>
+                          <p className="mb-4 text-sm text-text-secondary">
+                            Click the button below to watch the project video
+                          </p>
+                          <Button
+                            className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
+                            onClick={() => window.open(selectedProject.video, "_blank")}
+                          >
+                            <Play className="mr-2 h-4 w-4" /> Watch Video
+                          </Button>
+                        </div>
+                      </div>
+                    </TabsContent>
+                  )}
+>>>>>>> Stashed changes
                 </Tabs>
               </div>
             </>

@@ -60,8 +60,13 @@ module.exports = {
           heading: "hsl(var(--text-heading))",
         },
         gradient: {
+<<<<<<< Updated upstream
           from: "#8A2BE2", // Changed to BlueViolet
           to: "#9370DB", // Changed to MediumPurple
+=======
+          from: "#5416B4",
+          to: "#7027C3",
+>>>>>>> Stashed changes
         },
       },
       borderRadius: {
