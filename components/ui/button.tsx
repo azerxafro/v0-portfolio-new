@@ -10,8 +10,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         default:
           "bg-gradient-to-r from-purple-700 to-purple-500 text-black font-medium hover:opacity-90 transition-opacity",
+=======
+        default: "bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90 transition-opacity",
+>>>>>>> Stashed changes
 =======
         default: "bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90 transition-opacity",
 >>>>>>> Stashed changes
@@ -21,8 +25,12 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-text-primary underline-offset-4 hover:underline",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         gradient:
           "bg-gradient-to-r from-purple-700 to-purple-500 text-black font-medium hover:opacity-90 transition-opacity",
+=======
+        gradient: "bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90 transition-opacity",
+>>>>>>> Stashed changes
 =======
         gradient: "bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90 transition-opacity",
 >>>>>>> Stashed changes
