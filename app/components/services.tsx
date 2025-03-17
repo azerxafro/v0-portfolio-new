@@ -11,32 +11,32 @@ export default function Services() {
 
   const services = [
     {
-      icon: <Film className="h-10 w-10 mb-4 text-text-accent" />,
+      icon: <Film className="h-10 w-10 mb-4 text-purple-400" />,
       title: "Video Editing",
       description: "Professional video editing with attention to pacing, transitions, and storytelling.",
     },
     {
-      icon: <Scissors className="h-10 w-10 mb-4 text-text-accent" />,
+      icon: <Scissors className="h-10 w-10 mb-4 text-purple-400" />,
       title: "Content Creation",
       description: "Creating engaging content for various platforms including social media and web.",
     },
     {
-      icon: <Palette className="h-10 w-10 mb-4 text-text-accent" />,
+      icon: <Palette className="h-10 w-10 mb-4 text-purple-400" />,
       title: "Color Grading",
       description: "Expert color correction and grading to enhance visual aesthetics and mood.",
     },
     {
-      icon: <Music className="h-10 w-10 mb-4 text-text-accent" />,
+      icon: <Music className="h-10 w-10 mb-4 text-purple-400" />,
       title: "Sound Design",
       description: "Crafting immersive audio experiences with sound effects and music selection.",
     },
     {
-      icon: <Zap className="h-10 w-10 mb-4 text-text-accent" />,
+      icon: <Zap className="h-10 w-10 mb-4 text-purple-400" />,
       title: "Motion Graphics",
       description: "Dynamic motion graphics and visual effects to elevate your content.",
     },
     {
-      icon: <Clock className="h-10 w-10 mb-4 text-text-accent" />,
+      icon: <Clock className="h-10 w-10 mb-4 text-purple-400" />,
       title: "Quick Turnaround",
       description: "Efficient workflow ensuring timely delivery without compromising quality.",
     },
@@ -64,7 +64,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
-              className="bg-zinc-800 p-8 rounded-lg text-center hover:bg-zinc-700 transition-colors"
+              className="bg-zinc-800 p-8 rounded-lg text-center hover:bg-purple-900/30 transition-colors"
             >
               <div className="flex justify-center">{service.icon}</div>
               <h3 className="text-xl font-semibold mb-3 text-text-heading">{service.title}</h3>

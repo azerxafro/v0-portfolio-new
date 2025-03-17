@@ -84,7 +84,7 @@ export default function About() {
           <motion.div variants={itemVariants} className="mb-16 text-center">
             <h2 className="relative inline-block mb-8 text-3xl font-bold tracking-tighter sm:text-4xl">
               About Me
-              <span className="absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded bg-text-accent"></span>
+              <span className="absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded bg-purple-500"></span>
             </h2>
             <p className="mx-auto max-w-2xl text-text-secondary">
               Visual storyteller with a passion for transforming ideas into compelling narratives through the art of
@@ -100,7 +100,7 @@ export default function About() {
             <div className="grid grid-cols-1 lg:grid-cols-5">
               {/* Image Column */}
               <div className="relative col-span-2 flex items-center justify-center p-8 lg:p-12">
-                <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-zinc-700 lg:h-80 lg:w-80">
+                <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-purple-700 lg:h-80 lg:w-80">
                   <img
                     src="/placeholder.svg?height=400&width=400"
                     alt="Ashwin R"
@@ -158,19 +158,19 @@ export default function About() {
                 </div>
 
                 <div className="flex flex-wrap gap-3">
-                  <Badge variant="secondary" className="bg-zinc-700 hover:bg-zinc-600">
+                  <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
                     Video Editing
                   </Badge>
-                  <Badge variant="secondary" className="bg-zinc-700 hover:bg-zinc-600">
+                  <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
                     Motion Graphics
                   </Badge>
-                  <Badge variant="secondary" className="bg-zinc-700 hover:bg-zinc-600">
+                  <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
                     Color Grading
                   </Badge>
-                  <Badge variant="secondary" className="bg-zinc-700 hover:bg-zinc-600">
+                  <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
                     Sound Design
                   </Badge>
-                  <Badge variant="secondary" className="bg-zinc-700 hover:bg-zinc-600">
+                  <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
                     Storytelling
                   </Badge>
                 </div>
