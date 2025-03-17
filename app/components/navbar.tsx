@@ -42,13 +42,8 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            {/* Logo Swap - Replaced the text with your logo */}
-            <a href="#" className="flex items-center">
-              <img 
-                src="/logo.svg" 
-                alt="Ashwin R" 
-                className="h-10 w-auto" 
-              />
+            <a href="#" className="text-xl font-bold tracking-tighter text-text-heading">
+              ASHWIN R
             </a>
 
             {/* Desktop Navigation */}
@@ -128,3 +123,4 @@ export default function Navbar() {
     </>
   )
 }
+

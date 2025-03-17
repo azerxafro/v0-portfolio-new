@@ -191,15 +191,7 @@ export default function Contact() {
                 />
                 <Button
                   type="submit"
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
                   className="bg-gradient-to-r from-purple-700 to-purple-500 text-black font-medium hover:opacity-90"
-=======
-                  className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
->>>>>>> Stashed changes
-=======
-                  className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
->>>>>>> Stashed changes
                 >
                   Send Message
                 </Button>
