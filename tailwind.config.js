@@ -59,6 +59,10 @@ module.exports = {
           accent: "hsl(var(--text-accent))",
           heading: "hsl(var(--text-heading))",
         },
+        gradient: {
+          from: "#5416B4",
+          to: "#7027C3",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

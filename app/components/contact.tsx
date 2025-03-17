@@ -189,7 +189,10 @@ export default function Contact() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="text-text-primary">
+                <Button
+                  type="submit"
+                  className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
+                >
                   Send Message
                 </Button>
               </form>

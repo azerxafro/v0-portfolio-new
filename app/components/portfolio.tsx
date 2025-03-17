@@ -1,14 +1,25 @@
 "use client"
 
-import { useState, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useRef, useEffect } from "react"
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { Play, ExternalLink, Github, Calendar, Tag, ChevronLeft, ChevronRight, Info, LinkIcon } from "lucide-react"
+import {
+  Play,
+  ExternalLink,
+  Github,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  Info,
+  LinkIcon,
+  Filter,
+  ArrowUpRight,
+} from "lucide-react"
 
 // Project type definition
 type Project = {
@@ -34,10 +45,21 @@ type Project = {
 
 export default function Portfolio() {
   const ref = useRef(null)
+  const containerRef = useRef(null)
   const isInView = useInView(ref, { once: true })
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [showFilters, setShowFilters] = useState(false)
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null)
+
+  // Parallax effect for section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
 
   // Categories for filtering
   const categories = ["all", "commercial", "documentary", "music", "narrative"]
@@ -239,6 +261,17 @@ export default function Portfolio() {
     setCurrentImageIndex(0)
   }
 
+  // Auto-rotate images in the modal
+  useEffect(() => {
+    if (!selectedProject) return
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev === selectedProject.images.length - 1 ? 0 : prev + 1))
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [selectedProject])
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -259,149 +292,302 @@ export default function Portfolio() {
     },
   }
 
+  const filterVariants = {
+    hidden: { height: 0, opacity: 0 },
+    visible: {
+      height: "auto",
+      opacity: 1,
+      transition: { duration: 0.3 },
+    },
+  }
+
   return (
-    <section id="portfolio" className="bg-gradient-to-b from-zinc-900 to-black py-20">
-      <div ref={ref} className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <h2 className="relative inline-block mb-8 text-3xl font-bold tracking-tighter sm:text-4xl">
-            Portfolio
-            <span className="absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded bg-text-accent"></span>
-          </h2>
-          <p className="mb-12 text-text-secondary">
-            Browse through my selected works across different categories. Each project represents a unique creative
-            challenge and solution.
-          </p>
-        </motion.div>
+    <section id="portfolio" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-black py-20">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        <div className="absolute -left-20 top-20 h-64 w-64 rounded-full bg-text-accent/20 blur-3xl"></div>
+        <div className="absolute -right-20 bottom-40 h-64 w-64 rounded-full bg-text-accent/20 blur-3xl"></div>
+      </div>
 
-        {/* Category Filter */}
-        <div className="mb-12 flex flex-wrap justify-center gap-4 rounded-xl bg-zinc-800/30 p-4 backdrop-blur-sm">
-          {categories.map((category) => (
+      <motion.div ref={containerRef} style={{ y }} className="relative z-10">
+        <div ref={ref} className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8 }}
+            className="mx-auto max-w-3xl text-center"
+          >
+            <h2 className="relative inline-block mb-8 text-3xl font-bold tracking-tighter sm:text-4xl">
+              Portfolio
+              <span className="absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded bg-text-accent"></span>
+            </h2>
+            <p className="mb-12 text-text-secondary">
+              Browse through my selected works across different categories. Each project represents a unique creative
+              challenge and solution.
+            </p>
+          </motion.div>
+
+          {/* Mobile Filter Toggle */}
+          <div className="mb-6 flex justify-center md:hidden">
             <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              onClick={() => setSelectedCategory(category)}
-              className={`text-sm capitalize ${
-                selectedCategory === category
-                  ? "bg-text-accent/20 text-text-accent border-text-accent/50"
-                  : "text-text-secondary hover:text-text-primary hover:border-text-accent/30"
-              }`}
+              variant="outline"
+              onClick={() => setShowFilters(!showFilters)}
+              className="inline-flex items-center gap-2 border-text-accent/30 bg-zinc-800/50 text-text-secondary backdrop-blur-sm hover:bg-zinc-800 hover:text-text-primary"
             >
-              {category}
+              <Filter className="h-4 w-4" />
+              {showFilters ? "Hide Filters" : "Show Filters"}
             </Button>
-          ))}
-        </div>
+          </div>
 
-        {/* Projects Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          <AnimatePresence mode="wait">
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={itemVariants}
-                layout
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="h-full"
-              >
-                <Card className="group h-full overflow-hidden bg-zinc-800/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-text-accent/5">
-                  <CardContent className="p-0">
-                    <div className="relative overflow-hidden">
-                      {/* Project Thumbnail */}
-                      <div className="aspect-video overflow-hidden">
-                        <img
-                          src={project.thumbnail || "/placeholder.svg"}
-                          alt={project.title}
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                      </div>
+          {/* Category Filter */}
+          <AnimatePresence>
+            <motion.div
+              variants={filterVariants}
+              initial={showFilters ? "visible" : "hidden"}
+              animate={showFilters ? "visible" : "hidden"}
+              exit="hidden"
+              className="mb-6 overflow-hidden md:hidden"
+            >
+              <div className="flex flex-wrap justify-center gap-2 rounded-xl bg-zinc-800/30 p-4 backdrop-blur-sm">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`text-sm capitalize ${
+                      selectedCategory === category
+                        ? "bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white border-transparent"
+                        : "text-text-secondary hover:text-text-primary hover:border-[#5416B4]/30"
+                    }`}
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
-                      {/* Overlay with quick info */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 p-6 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
-                        <h3 className="mb-2 text-xl font-semibold text-text-primary">{project.title}</h3>
-                        <p className="mb-4 text-center text-sm text-text-secondary line-clamp-3">
-                          {project.shortDescription}
-                        </p>
-                        <Button
+          {/* Desktop Category Filter */}
+          <div className="mb-12 hidden md:block">
+            <div className="flex flex-wrap justify-center gap-4 rounded-xl bg-zinc-800/30 p-4 backdrop-blur-sm">
+              {categories.map((category) => (
+                <Button
+                  key={category}
+                  variant={selectedCategory === category ? "default" : "outline"}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`relative overflow-hidden text-sm capitalize ${
+                    selectedCategory === category
+                      ? "bg-text-accent text-black border-text-accent"
+                      : "text-text-secondary hover:text-text-accent hover:border-text-accent"
+                  }`}
+                >
+                  {selectedCategory === category && (
+                    <motion.span
+                      layoutId="activeCategory"
+                      className="absolute inset-0 bg-text-accent"
+                      initial={false}
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">{category}</span>
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* Projects Grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            <AnimatePresence mode="wait">
+              {filteredProjects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  variants={itemVariants}
+                  layout
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  className="group h-full"
+                  onMouseEnter={() => setHoveredProject(project.id)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  <Card className="relative h-full overflow-hidden rounded-xl border-zinc-800 bg-zinc-800/30 backdrop-blur-sm transition-all duration-500 hover:border-text-accent/30 hover:shadow-lg hover:shadow-text-accent/5">
+                    <CardContent className="p-0">
+                      <div className="relative overflow-hidden">
+                        {/* Project Thumbnail */}
+                        <div className="aspect-video overflow-hidden">
+                          <motion.img
+                            src={project.thumbnail || "/placeholder.svg"}
+                            alt={project.title}
+                            className="h-full w-full object-cover"
+                            animate={{
+                              scale: hoveredProject === project.id ? 1.1 : 1,
+                              filter: hoveredProject === project.id ? "brightness(0.7)" : "brightness(1)",
+                            }}
+                            transition={{ duration: 0.5 }}
+                          />
+                        </div>
+
+                        {/* Category Badge */}
+                        <Badge
                           variant="outline"
-                          size="sm"
-                          className="bg-text-accent/10 text-text-primary backdrop-blur-sm hover:bg-text-accent/20"
-                          onClick={() => openProjectDetails(project)}
+                          className="absolute left-3 top-3 bg-black/50 text-text-accent backdrop-blur-sm"
                         >
-                          <Info className="mr-2 h-4 w-4" /> View Details
-                        </Button>
-                      </div>
-                    </div>
-
-                    {/* Card Footer */}
-                    <div className="p-4">
-                      <div className="mb-2 flex items-center justify-between">
-                        <h3 className="text-lg font-semibold text-text-heading">{project.title}</h3>
-                        <Badge variant="outline" className="bg-zinc-700/50 text-text-accent">
                           {project.category}
                         </Badge>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-text-secondary">
-                        <Calendar className="h-3 w-3" /> {project.year}
-                        <span>•</span>
-                        <Tag className="h-3 w-3" /> {project.tags[0]}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
 
-        {/* Empty State */}
-        {filteredProjects.length === 0 && (
-          <div className="mt-12 rounded-lg bg-zinc-800/30 p-8 text-center backdrop-blur-sm">
-            <p className="text-text-secondary">
-              No projects found in this category. Try selecting a different category.
-            </p>
-          </div>
-        )}
-      </div>
+                        {/* Overlay with quick info */}
+                        <motion.div
+                          className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 p-6 backdrop-blur-sm"
+                          initial={{ opacity: 0 }}
+                          animate={{
+                            opacity: hoveredProject === project.id ? 1 : 0,
+                            y: hoveredProject === project.id ? 0 : 10,
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <motion.h3
+                            className="mb-2 text-xl font-semibold text-text-primary"
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{
+                              y: hoveredProject === project.id ? 0 : 20,
+                              opacity: hoveredProject === project.id ? 1 : 0,
+                            }}
+                            transition={{ duration: 0.3, delay: 0.1 }}
+                          >
+                            {project.title}
+                          </motion.h3>
+                          <motion.p
+                            className="mb-4 text-center text-sm text-text-secondary line-clamp-3"
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{
+                              y: hoveredProject === project.id ? 0 : 20,
+                              opacity: hoveredProject === project.id ? 1 : 0,
+                            }}
+                            transition={{ duration: 0.3, delay: 0.2 }}
+                          >
+                            {project.shortDescription}
+                          </motion.p>
+                          <motion.div
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{
+                              y: hoveredProject === project.id ? 0 : 20,
+                              opacity: hoveredProject === project.id ? 1 : 0,
+                            }}
+                            transition={{ duration: 0.3, delay: 0.3 }}
+                          >
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
+                              onClick={() => openProjectDetails(project)}
+                            >
+                              <Info className="mr-2 h-4 w-4" /> View Details
+                            </Button>
+                          </motion.div>
+                        </motion.div>
+                      </div>
+
+                      {/* Card Footer */}
+                      <div className="p-4">
+                        <div className="mb-2 flex items-center justify-between">
+                          <h3 className="text-lg font-semibold text-text-heading">{project.title}</h3>
+                          <motion.button
+                            whileHover={{ scale: 1.1, rotate: 45 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => openProjectDetails(project)}
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-700/50 text-text-accent transition-colors hover:bg-text-accent/20"
+                          >
+                            <ArrowUpRight className="h-4 w-4" />
+                          </motion.button>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-text-secondary">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3" /> {project.year}
+                          </div>
+                          <span>•</span>
+                          <div className="flex flex-wrap gap-1">
+                            {project.tags.slice(0, 2).map((tag, index) => (
+                              <Badge
+                                key={index}
+                                variant="outline"
+                                className="border-zinc-700 bg-zinc-800/50 px-1.5 py-0 text-[10px]"
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
+                            {project.tags.length > 2 && (
+                              <Badge
+                                variant="outline"
+                                className="border-zinc-700 bg-zinc-800/50 px-1.5 py-0 text-[10px]"
+                              >
+                                +{project.tags.length - 2}
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          {/* Empty State */}
+          {filteredProjects.length === 0 && (
+            <div className="mt-12 rounded-lg bg-zinc-800/30 p-8 text-center backdrop-blur-sm">
+              <p className="text-text-secondary">
+                No projects found in this category. Try selecting a different category.
+              </p>
+            </div>
+          )}
+        </div>
+      </motion.div>
 
       {/* Project Details Dialog */}
       <Dialog open={selectedProject !== null} onOpenChange={(open) => !open && setSelectedProject(null)}>
-        <DialogContent className="max-w-4xl bg-zinc-900 p-0 text-text-primary">
+        <DialogContent className="max-w-4xl border-zinc-800 bg-zinc-900 p-0 text-text-primary">
           {selectedProject && (
             <>
               {/* Image Gallery */}
               <div className="relative aspect-video w-full overflow-hidden">
-                <img
-                  src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
-                  alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                  className="h-full w-full object-cover"
-                />
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentImageIndex}
+                    src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
+                    alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                    className="h-full w-full object-cover"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </AnimatePresence>
 
                 {/* Image Navigation */}
                 {selectedProject.images.length > 1 && (
                   <>
-                    <button
+                    <motion.button
                       onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-text-accent hover:text-black"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
                       aria-label="Previous image"
                     >
                       <ChevronLeft className="h-6 w-6" />
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
                       onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-text-accent hover:text-black"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
                       aria-label="Next image"
                     >
                       <ChevronRight className="h-6 w-6" />
-                    </button>
+                    </motion.button>
 
                     {/* Image Indicators */}
                     <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
@@ -409,8 +595,8 @@ export default function Portfolio() {
                         <button
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
-                          className={`h-2 w-2 rounded-full ${
-                            index === currentImageIndex ? "bg-text-accent" : "bg-white/50"
+                          className={`h-2 w-8 rounded-full transition-all ${
+                            index === currentImageIndex ? "bg-text-accent" : "bg-white/30"
                           }`}
                           aria-label={`Go to image ${index + 1}`}
                         />
@@ -426,24 +612,28 @@ export default function Portfolio() {
                     <DialogTitle className="text-2xl text-text-heading">{selectedProject.title}</DialogTitle>
                     <div className="flex gap-2">
                       {selectedProject.liveUrl && (
-                        <a
+                        <motion.a
                           href={selectedProject.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-md bg-text-accent/20 px-3 py-1 text-sm text-text-accent transition-colors hover:bg-text-accent/30"
+                          className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-[#5416B4] to-[#7027C3] px-3 py-1 text-sm text-white transition-opacity hover:opacity-90"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                         >
                           <ExternalLink className="h-4 w-4" /> Live Project
-                        </a>
+                        </motion.a>
                       )}
                       {selectedProject.repoUrl && (
-                        <a
+                        <motion.a
                           href={selectedProject.repoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-md bg-zinc-700/50 px-3 py-1 text-sm text-text-secondary transition-colors hover:bg-zinc-700"
+                          className="inline-flex items-center gap-1 rounded-md bg-zinc-700/50 px-3 py-1 text-sm text-text-secondary transition-colors hover:bg-zinc-700 hover:text-text-primary"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                         >
                           <Github className="h-4 w-4" /> Repository
-                        </a>
+                        </motion.a>
                       )}
                     </div>
                   </div>
@@ -472,19 +662,19 @@ export default function Portfolio() {
                       <p className="text-text-secondary whitespace-pre-line">{selectedProject.fullDescription}</p>
 
                       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div className="rounded-lg bg-zinc-800/50 p-4">
+                        <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
                           <h4 className="mb-2 text-sm font-medium text-text-accent">Role</h4>
                           <p className="text-text-secondary">{selectedProject.role}</p>
                         </div>
-                        <div className="rounded-lg bg-zinc-800/50 p-4">
+                        <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
                           <h4 className="mb-2 text-sm font-medium text-text-accent">Client</h4>
                           <p className="text-text-secondary">{selectedProject.client}</p>
                         </div>
-                        <div className="rounded-lg bg-zinc-800/50 p-4">
+                        <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
                           <h4 className="mb-2 text-sm font-medium text-text-accent">Year</h4>
                           <p className="text-text-secondary">{selectedProject.year}</p>
                         </div>
-                        <div className="rounded-lg bg-zinc-800/50 p-4">
+                        <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
                           <h4 className="mb-2 text-sm font-medium text-text-accent">Duration</h4>
                           <p className="text-text-secondary">{selectedProject.duration}</p>
                         </div>
@@ -499,7 +689,7 @@ export default function Portfolio() {
                         <h4 className="mb-3 text-lg font-medium text-text-heading">Technologies Used</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedProject.technologies.map((tech, index) => (
-                            <Badge key={index} className="bg-zinc-800 text-text-primary">
+                            <Badge key={index} className="bg-text-accent/10 text-text-accent">
                               {tech}
                             </Badge>
                           ))}
@@ -539,14 +729,20 @@ export default function Portfolio() {
                   {/* Features Tab */}
                   <TabsContent value="features" className="mt-4">
                     <h4 className="mb-4 text-lg font-medium text-text-heading">Key Features</h4>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {selectedProject.features.map((feature, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <span className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-text-accent/20 text-xs text-text-accent">
+                        <motion.li
+                          key={index}
+                          className="flex items-start gap-3 rounded-lg bg-zinc-800/30 p-3 backdrop-blur-sm"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3, delay: index * 0.1 }}
+                        >
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-text-accent/20 text-xs font-medium text-text-accent">
                             {index + 1}
                           </span>
                           <span className="text-text-secondary">{feature}</span>
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
                   </TabsContent>
@@ -554,20 +750,21 @@ export default function Portfolio() {
                   {/* Video Tab */}
                   {selectedProject.video && (
                     <TabsContent value="video" className="mt-4">
-                      <div className="aspect-video overflow-hidden rounded-lg">
-                        <div className="flex h-full items-center justify-center bg-zinc-800">
+                      <div className="aspect-video overflow-hidden rounded-lg bg-zinc-800">
+                        <div className="flex h-full flex-col items-center justify-center p-6 text-center">
+                          <Play className="mb-4 h-12 w-12 text-text-accent opacity-80" />
+                          <h4 className="mb-2 text-lg font-medium text-text-heading">Project Video</h4>
+                          <p className="mb-4 text-sm text-text-secondary">
+                            Click the button below to watch the project video
+                          </p>
                           <Button
-                            className="flex items-center gap-2 bg-text-accent hover:bg-text-accent/80"
+                            className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
                             onClick={() => window.open(selectedProject.video, "_blank")}
                           >
-                            <Play className="h-4 w-4" /> Watch Video
+                            <Play className="mr-2 h-4 w-4" /> Watch Video
                           </Button>
                         </div>
                       </div>
-                      <p className="mt-4 text-sm text-text-secondary">
-                        Click the button above to watch the project video. In a production environment, this would be
-                        embedded directly in the page.
-                      </p>
                     </TabsContent>
                   )}
                 </Tabs>
