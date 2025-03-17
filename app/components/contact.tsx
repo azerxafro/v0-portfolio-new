@@ -67,7 +67,7 @@ export default function Contact() {
 
             <div className="space-y-6">
               <div className="flex items-start">
-                <Mail className="h-5 w-5 mr-3 text-text-accent mt-0.5" />
+                <Mail className="h-5 w-5 mr-3 text-purple-400 mt-0.5" />
                 <div>
                   <h4 className="font-medium text-text-heading">Email</h4>
                   <p className="text-text-secondary">ashwin.r@example.com</p>
@@ -75,7 +75,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start">
-                <Phone className="h-5 w-5 mr-3 text-text-accent mt-0.5" />
+                <Phone className="h-5 w-5 mr-3 text-purple-400 mt-0.5" />
                 <div>
                   <h4 className="font-medium text-text-heading">Phone</h4>
                   <p className="text-text-secondary">+1 (555) 123-4567</p>
@@ -83,7 +83,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start">
-                <MapPin className="h-5 w-5 mr-3 text-text-accent mt-0.5" />
+                <MapPin className="h-5 w-5 mr-3 text-purple-400 mt-0.5" />
                 <div>
                   <h4 className="font-medium text-text-heading">Location</h4>
                   <p className="text-text-secondary">Los Angeles, California</p>
@@ -91,7 +91,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start">
-                <Clock className="h-5 w-5 mr-3 text-text-accent mt-0.5" />
+                <Clock className="h-5 w-5 mr-3 text-purple-400 mt-0.5" />
                 <div>
                   <h4 className="font-medium text-text-heading">Working Hours</h4>
                   <p className="text-text-secondary">Monday - Friday: 9am - 6pm</p>
@@ -104,7 +104,7 @@ export default function Contact() {
               <div className="flex space-x-4">
                 <a
                   href="#"
-                  className="bg-zinc-800 hover:bg-zinc-700 p-3 rounded-full transition-colors text-text-primary"
+                  className="bg-zinc-800 hover:bg-purple-700 p-3 rounded-full transition-colors text-text-primary"
                 >
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
@@ -116,7 +116,7 @@ export default function Contact() {
                 </a>
                 <a
                   href="#"
-                  className="bg-zinc-800 hover:bg-zinc-700 p-3 rounded-full transition-colors text-text-primary"
+                  className="bg-zinc-800 hover:bg-purple-700 p-3 rounded-full transition-colors text-text-primary"
                 >
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.663 9.151 8.437 9.879v-6.988h-2.54v2.888h2.54v2.991c0 .542-.058 1.62-.425 2.285a2.184 2.184 0 01-1.129.948V21h3.414v-6.155c0-.682.095-1.654.485-2.357.39-.703.922-1.142 1.585-1.142 1.049 0 1.951.079 2.21 1.077v3.304H22v-4.077c-.299-.492-.534-1.474-.534-2.203 0-1.591 1.096-2.711 2.702-2.711h.003z" />
@@ -124,7 +124,7 @@ export default function Contact() {
                 </a>
                 <a
                   href="#"
-                  className="bg-zinc-800 hover:bg-zinc-700 p-3 rounded-full transition-colors text-text-primary"
+                  className="bg-zinc-800 hover:bg-purple-700 p-3 rounded-full transition-colors text-text-primary"
                 >
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
@@ -191,7 +191,7 @@ export default function Contact() {
                 />
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
+                  className="bg-gradient-to-r from-purple-700 to-purple-500 text-black font-medium hover:opacity-90"
                 >
                   Send Message
                 </Button>

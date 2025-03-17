@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function Navbar() {
@@ -52,18 +52,30 @@ export default function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+                  className="text-sm text-text-secondary hover:text-purple-400 transition-colors"
                 >
                   {link.name}
                 </a>
               ))}
             </div>
 
+            {/* Download CV Button - Desktop */}
+            <div className="hidden md:block">
+              <a
+                href="/assets/ashwin-r-cv.pdf"
+                download
+                className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-purple-700 to-purple-500 px-4 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+              >
+                <Download className="h-4 w-4" />
+                Download CV
+              </a>
+            </div>
+
             {/* Mobile Menu Button */}
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-text-primary"
+              className="md:hidden text-purple-400 hover:text-purple-300"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -93,6 +105,17 @@ export default function Navbar() {
                   {link.name}
                 </a>
               ))}
+
+              {/* Download CV Button - Mobile */}
+              <a
+                href="/assets/ashwin-r-cv.pdf"
+                download
+                className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-purple-700 to-purple-500 px-4 py-2 text-base font-medium text-black hover:opacity-90 transition-opacity self-start mt-4"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Download className="h-5 w-5" />
+                Download CV
+              </a>
             </div>
           </div>
         </motion.div>

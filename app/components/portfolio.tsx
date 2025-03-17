@@ -9,7 +9,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import {
-  Play,
   ExternalLink,
   Github,
   Calendar,
@@ -19,9 +18,13 @@ import {
   LinkIcon,
   Filter,
   ArrowUpRight,
+  Youtube,
+  FileImage,
+  FileVideo,
+  Loader2,
 } from "lucide-react"
 
-// Project type definition
+// Project type definition with YouTube and Google Drive support
 type Project = {
   id: number
   title: string
@@ -31,6 +34,12 @@ type Project = {
   thumbnail: string
   images: string[]
   video?: string
+  youtubeId?: string
+  googleDriveFiles?: {
+    id: string
+    type: "image" | "video"
+    name: string
+  }[]
   year: string
   shortDescription: string
   fullDescription: string
@@ -52,6 +61,9 @@ export default function Portfolio() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [showFilters, setShowFilters] = useState(false)
   const [hoveredProject, setHoveredProject] = useState<number | null>(null)
+  const [activeTab, setActiveTab] = useState("overview")
+  const [isLoading, setIsLoading] = useState(false)
+  const [currentGDriveFile, setCurrentGDriveFile] = useState<string | null>(null)
 
   // Parallax effect for section
   const { scrollYProgress } = useScroll({
@@ -64,7 +76,7 @@ export default function Portfolio() {
   // Categories for filtering
   const categories = ["all", "commercial", "documentary", "music", "narrative"]
 
-  // Sample projects data - in a real implementation, this could be fetched from an API or CMS
+  // Sample projects data with YouTube and Google Drive integration
   const projects: Project[] = [
     {
       id: 1,
@@ -73,12 +85,20 @@ export default function Portfolio() {
       category: "commercial",
       tags: ["Branding", "Corporate", "Technology"],
       thumbnail: "/placeholder.svg?height=400&width=600",
-      images: [
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
+      images: ["/placeholder.svg?height=600&width=1000", "/placeholder.svg?height=600&width=1000"],
+      youtubeId: "dQw4w9WgXcQ", // Example YouTube ID
+      googleDriveFiles: [
+        {
+          id: "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs",
+          type: "image",
+          name: "Project Mockup",
+        },
+        {
+          id: "1ZdR3L3qP4Bkq8noWLJHSr_iBau0DNT4Kli4SxNc2YEo",
+          type: "video",
+          name: "Behind the Scenes",
+        },
       ],
-      video: "https://example.com/video.mp4",
       year: "2024",
       shortDescription: "A dynamic brand story showcasing XYZ Tech's innovative products and company culture.",
       fullDescription:
@@ -103,11 +123,8 @@ export default function Portfolio() {
       category: "documentary",
       tags: ["Documentary", "Urban", "Architecture"],
       thumbnail: "/placeholder.svg?height=400&width=600",
-      images: [
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-      ],
+      images: ["/placeholder.svg?height=600&width=1000", "/placeholder.svg?height=600&width=1000"],
+      youtubeId: "C0DPdy98e4c", // Example YouTube ID
       year: "2023",
       shortDescription: "An exploration of urban architecture and its impact on community life.",
       fullDescription:
@@ -131,10 +148,18 @@ export default function Portfolio() {
       category: "music",
       tags: ["Music Video", "Indie", "Artistic"],
       thumbnail: "/placeholder.svg?height=400&width=600",
-      images: [
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
+      images: ["/placeholder.svg?height=600&width=1000", "/placeholder.svg?height=600&width=1000"],
+      googleDriveFiles: [
+        {
+          id: "1Sk-KBs5bXoYW1wkzt5yyfLa8wNgL5c9z",
+          type: "image",
+          name: "Album Artwork",
+        },
+        {
+          id: "1EpyVeCy-hF_ILEtIUfSLRnxJbITfA6-Z",
+          type: "video",
+          name: "Music Video",
+        },
       ],
       year: "2024",
       shortDescription: "A nostalgic music video blending vintage aesthetics with contemporary music.",
@@ -152,91 +177,6 @@ export default function Portfolio() {
       duration: "4 minutes",
       liveUrl: "https://example.com/echoes-of-time",
       repoUrl: "https://github.com/username/echoes-project",
-    },
-    {
-      id: 4,
-      title: "Digital Dreams",
-      slug: "digital-dreams",
-      category: "commercial",
-      tags: ["Product Launch", "Tech", "Futuristic"],
-      thumbnail: "/placeholder.svg?height=400&width=600",
-      images: [
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-      ],
-      year: "2023",
-      shortDescription: "A cutting-edge product launch video with innovative visual effects.",
-      fullDescription:
-        "Digital Dreams is a tech product launch video featuring cutting-edge visual effects and seamless transitions. Created for the launch of a new AR headset, the video needed to communicate complex technical features while maintaining an engaging and aspirational tone.\n\nThe project required precise timing and innovative visual techniques to highlight product features. We developed a visual language that combined realistic product demonstrations with abstract representations of the technology's capabilities. The editing approach focused on creating a sense of wonder and possibility, positioning the product as a gateway to new experiences.",
-      technologies: ["Adobe Premiere Pro", "After Effects", "Cinema 4D", "Element 3D"],
-      features: [
-        "3D product animations",
-        "UI/UX demonstrations",
-        "Particle effects for data visualization",
-        "Seamless transitions between real and virtual environments",
-      ],
-      role: "Editor & Motion Designer",
-      client: "Future Tech Innovations",
-      duration: "90 seconds",
-      liveUrl: "https://example.com/digital-dreams",
-    },
-    {
-      id: 5,
-      title: "The Silent Journey",
-      slug: "silent-journey",
-      category: "narrative",
-      tags: ["Short Film", "Drama", "Experimental"],
-      thumbnail: "/placeholder.svg?height=400&width=600",
-      images: [
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-      ],
-      year: "2024",
-      shortDescription: "A poetic short film about a traveler's inner transformation.",
-      fullDescription:
-        "The Silent Journey is a short film that tells the story of a traveler's inner transformation through a minimalist narrative approach. With limited dialogue, the story unfolds primarily through visual storytelling, sound design, and careful pacing.\n\nThe editing approach focused on subtle emotional cues and atmospheric storytelling techniques. We employed a deliberate pacing strategy that mirrors the protagonist's emotional state, using longer takes during moments of contemplation and quicker cuts during moments of revelation. The color grading evolved throughout the film to reflect the character's changing perspective.",
-      technologies: ["Adobe Premiere Pro", "DaVinci Resolve", "Audition"],
-      features: [
-        "Minimalist narrative structure",
-        "Evolving color palette",
-        "Symbolic visual motifs",
-        "Atmospheric sound design",
-      ],
-      role: "Editor & Colorist",
-      client: "Independent Film Collective",
-      duration: "12 minutes",
-      liveUrl: "https://example.com/silent-journey",
-      repoUrl: "https://github.com/username/silent-journey",
-    },
-    {
-      id: 6,
-      title: "Rhythms of Nature",
-      slug: "rhythms-of-nature",
-      category: "documentary",
-      tags: ["Nature", "Environmental", "Educational"],
-      thumbnail: "/placeholder.svg?height=400&width=600",
-      images: [
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-        "/placeholder.svg?height=600&width=1000",
-      ],
-      year: "2023",
-      shortDescription: "A nature documentary exploring hidden patterns in natural ecosystems.",
-      fullDescription:
-        "Rhythms of Nature is a documentary exploring the hidden patterns and rhythms in natural ecosystems. The film examines how different species interact with their environment and each other, revealing the intricate balance that sustains life on Earth.\n\nThis project involved intricate sound design and carefully paced visual storytelling. We synchronized the editing rhythm with natural cycles and movements, creating a viewing experience that immerses the audience in the flow of nature. The approach combined scientific accuracy with artistic presentation to make complex ecological concepts accessible and engaging.",
-      technologies: ["Adobe Premiere Pro", "DaVinci Resolve", "Audition", "Pro Tools"],
-      features: [
-        "Time-lapse photography",
-        "Macro cinematography",
-        "Scientific visualizations",
-        "Original score synchronized with natural rhythms",
-      ],
-      role: "Editor & Sound Designer",
-      client: "EcoVision Media",
-      duration: "25 minutes",
-      liveUrl: "https://example.com/rhythms-of-nature",
     },
   ]
 
@@ -259,18 +199,28 @@ export default function Portfolio() {
   const openProjectDetails = (project: Project) => {
     setSelectedProject(project)
     setCurrentImageIndex(0)
+    setActiveTab("overview")
+    setCurrentGDriveFile(null)
   }
 
   // Auto-rotate images in the modal
   useEffect(() => {
-    if (!selectedProject) return
+    if (!selectedProject || activeTab !== "overview") return
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev === selectedProject.images.length - 1 ? 0 : prev + 1))
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [selectedProject])
+  }, [selectedProject, activeTab])
+
+  // Handle Google Drive file preview
+  const handleGDrivePreview = (fileId: string) => {
+    setIsLoading(true)
+    setCurrentGDriveFile(fileId)
+    // In a real implementation, you might need to fetch file metadata or prepare the preview
+    setTimeout(() => setIsLoading(false), 1000) // Simulate loading
+  }
 
   // Animation variants
   const containerVariants = {
@@ -305,8 +255,8 @@ export default function Portfolio() {
     <section id="portfolio" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-black py-20">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
-        <div className="absolute -left-20 top-20 h-64 w-64 rounded-full bg-text-accent/20 blur-3xl"></div>
-        <div className="absolute -right-20 bottom-40 h-64 w-64 rounded-full bg-text-accent/20 blur-3xl"></div>
+        <div className="absolute -left-20 top-20 h-64 w-64 rounded-full bg-purple-500/20 blur-3xl"></div>
+        <div className="absolute -right-20 bottom-40 h-64 w-64 rounded-full bg-purple-500/20 blur-3xl"></div>
       </div>
 
       <motion.div ref={containerRef} style={{ y }} className="relative z-10">
@@ -319,7 +269,7 @@ export default function Portfolio() {
           >
             <h2 className="relative inline-block mb-8 text-3xl font-bold tracking-tighter sm:text-4xl">
               Portfolio
-              <span className="absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded bg-text-accent"></span>
+              <span className="absolute -bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 transform rounded bg-purple-500"></span>
             </h2>
             <p className="mb-12 text-text-secondary">
               Browse through my selected works across different categories. Each project represents a unique creative
@@ -332,7 +282,7 @@ export default function Portfolio() {
             <Button
               variant="outline"
               onClick={() => setShowFilters(!showFilters)}
-              className="inline-flex items-center gap-2 border-text-accent/30 bg-zinc-800/50 text-text-secondary backdrop-blur-sm hover:bg-zinc-800 hover:text-text-primary"
+              className="inline-flex items-center gap-2 border-purple-500/30 bg-zinc-800/50 text-text-secondary backdrop-blur-sm hover:bg-zinc-800 hover:text-text-primary"
             >
               <Filter className="h-4 w-4" />
               {showFilters ? "Hide Filters" : "Show Filters"}
@@ -356,8 +306,8 @@ export default function Portfolio() {
                     onClick={() => setSelectedCategory(category)}
                     className={`text-sm capitalize ${
                       selectedCategory === category
-                        ? "bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white border-transparent"
-                        : "text-text-secondary hover:text-text-primary hover:border-[#5416B4]/30"
+                        ? "bg-gradient-to-r from-purple-700 to-purple-500 text-black font-medium border-transparent"
+                        : "text-text-secondary hover:text-purple-400 hover:border-purple-500/30"
                     }`}
                   >
                     {category}
@@ -377,14 +327,14 @@ export default function Portfolio() {
                   onClick={() => setSelectedCategory(category)}
                   className={`relative overflow-hidden text-sm capitalize ${
                     selectedCategory === category
-                      ? "bg-text-accent text-black border-text-accent"
-                      : "text-text-secondary hover:text-text-accent hover:border-text-accent"
+                      ? "bg-gradient-to-r from-purple-700 to-purple-500 text-white border-transparent"
+                      : "text-text-secondary hover:text-purple-400 hover:border-purple-500/30"
                   }`}
                 >
                   {selectedCategory === category && (
                     <motion.span
                       layoutId="activeCategory"
-                      className="absolute inset-0 bg-text-accent"
+                      className="absolute inset-0 bg-gradient-to-r from-purple-700 to-purple-500"
                       initial={false}
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
@@ -413,7 +363,7 @@ export default function Portfolio() {
                   onMouseEnter={() => setHoveredProject(project.id)}
                   onMouseLeave={() => setHoveredProject(null)}
                 >
-                  <Card className="relative h-full overflow-hidden rounded-xl border-zinc-800 bg-zinc-800/30 backdrop-blur-sm transition-all duration-500 hover:border-text-accent/30 hover:shadow-lg hover:shadow-text-accent/5">
+                  <Card className="relative h-full overflow-hidden rounded-xl border-zinc-800 bg-zinc-800/30 backdrop-blur-sm transition-all duration-500 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/5">
                     <CardContent className="p-0">
                       <div className="relative overflow-hidden">
                         {/* Project Thumbnail */}
@@ -430,10 +380,24 @@ export default function Portfolio() {
                           />
                         </div>
 
+                        {/* Media Type Indicators */}
+                        <div className="absolute right-3 top-3 flex gap-2">
+                          {project.youtubeId && (
+                            <Badge variant="outline" className="bg-black/50 text-red-500 backdrop-blur-sm">
+                              <Youtube className="h-3 w-3 mr-1" /> YouTube
+                            </Badge>
+                          )}
+                          {project.googleDriveFiles && project.googleDriveFiles.length > 0 && (
+                            <Badge variant="outline" className="bg-black/50 text-blue-400 backdrop-blur-sm">
+                              <FileImage className="h-3 w-3 mr-1" /> Drive
+                            </Badge>
+                          )}
+                        </div>
+
                         {/* Category Badge */}
                         <Badge
                           variant="outline"
-                          className="absolute left-3 top-3 bg-black/50 text-text-accent backdrop-blur-sm"
+                          className="absolute left-3 top-3 bg-black/50 text-purple-400 backdrop-blur-sm"
                         >
                           {project.category}
                         </Badge>
@@ -481,7 +445,7 @@ export default function Portfolio() {
                             <Button
                               variant="outline"
                               size="sm"
-                              className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
+                              className="bg-gradient-to-r from-purple-700 to-purple-500 text-white hover:opacity-90"
                               onClick={() => openProjectDetails(project)}
                             >
                               <Info className="mr-2 h-4 w-4" /> View Details
@@ -498,7 +462,7 @@ export default function Portfolio() {
                             whileHover={{ scale: 1.1, rotate: 45 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => openProjectDetails(project)}
-                            className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-700/50 text-text-accent transition-colors hover:bg-text-accent/20"
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-700/50 text-purple-400 transition-colors hover:bg-purple-500/20"
                           >
                             <ArrowUpRight className="h-4 w-4" />
                           </motion.button>
@@ -552,27 +516,57 @@ export default function Portfolio() {
         <DialogContent className="max-w-4xl border-zinc-800 bg-zinc-900 p-0 text-text-primary">
           {selectedProject && (
             <>
-              {/* Image Gallery */}
+              {/* Image Gallery or Media Preview */}
               <div className="relative aspect-video w-full overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={currentImageIndex}
-                    src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
-                    alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                    className="h-full w-full object-cover"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                  />
-                </AnimatePresence>
+                {activeTab === "overview" && (
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={currentImageIndex}
+                      src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
+                      alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                      className="h-full w-full object-cover"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </AnimatePresence>
+                )}
 
-                {/* Image Navigation */}
-                {selectedProject.images.length > 1 && (
+                {activeTab === "youtube" && selectedProject.youtubeId && (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${selectedProject.youtubeId}`}
+                    title={`${selectedProject.title} - YouTube Video`}
+                    className="h-full w-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                )}
+
+                {activeTab === "gdrive" && currentGDriveFile && (
+                  <div className="h-full w-full flex items-center justify-center bg-zinc-800">
+                    {isLoading ? (
+                      <div className="flex flex-col items-center justify-center">
+                        <Loader2 className="h-8 w-8 animate-spin text-purple-500 mb-2" />
+                        <p className="text-text-secondary">Loading preview...</p>
+                      </div>
+                    ) : (
+                      <iframe
+                        src={`https://drive.google.com/file/d/${currentGDriveFile}/preview`}
+                        className="h-full w-full"
+                        allow="autoplay"
+                      ></iframe>
+                    )}
+                  </div>
+                )}
+
+                {/* Image Navigation for Overview tab */}
+                {activeTab === "overview" && selectedProject.images.length > 1 && (
                   <>
                     <motion.button
                       onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-text-accent hover:text-black"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-purple-500 hover:text-black"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       aria-label="Previous image"
@@ -581,7 +575,7 @@ export default function Portfolio() {
                     </motion.button>
                     <motion.button
                       onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-text-accent hover:text-black"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition-colors hover:bg-purple-500 hover:text-black"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       aria-label="Next image"
@@ -596,7 +590,7 @@ export default function Portfolio() {
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
                           className={`h-2 w-8 rounded-full transition-all ${
-                            index === currentImageIndex ? "bg-text-accent" : "bg-white/30"
+                            index === currentImageIndex ? "bg-purple-500" : "bg-white/30"
                           }`}
                           aria-label={`Go to image ${index + 1}`}
                         />
@@ -616,7 +610,7 @@ export default function Portfolio() {
                           href={selectedProject.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-[#5416B4] to-[#7027C3] px-3 py-1 text-sm text-white transition-opacity hover:opacity-90"
+                          className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-purple-700 to-purple-500 px-3 py-1 text-sm text-white transition-opacity hover:opacity-90"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
@@ -648,12 +642,15 @@ export default function Portfolio() {
                 </DialogHeader>
 
                 {/* Project Content */}
-                <Tabs defaultValue="overview" className="mt-6">
+                <Tabs defaultValue="overview" className="mt-6" value={activeTab} onValueChange={setActiveTab}>
                   <TabsList className="w-full">
                     <TabsTrigger value="overview">Overview</TabsTrigger>
                     <TabsTrigger value="details">Details</TabsTrigger>
+                    {selectedProject.youtubeId && <TabsTrigger value="youtube">YouTube</TabsTrigger>}
+                    {selectedProject.googleDriveFiles && selectedProject.googleDriveFiles.length > 0 && (
+                      <TabsTrigger value="gdrive">Google Drive</TabsTrigger>
+                    )}
                     <TabsTrigger value="features">Features</TabsTrigger>
-                    {selectedProject.video && <TabsTrigger value="video">Video</TabsTrigger>}
                   </TabsList>
 
                   {/* Overview Tab */}
@@ -663,19 +660,19 @@ export default function Portfolio() {
 
                       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
-                          <h4 className="mb-2 text-sm font-medium text-text-accent">Role</h4>
+                          <h4 className="mb-2 text-sm font-medium text-purple-400">Role</h4>
                           <p className="text-text-secondary">{selectedProject.role}</p>
                         </div>
                         <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
-                          <h4 className="mb-2 text-sm font-medium text-text-accent">Client</h4>
+                          <h4 className="mb-2 text-sm font-medium text-purple-400">Client</h4>
                           <p className="text-text-secondary">{selectedProject.client}</p>
                         </div>
                         <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
-                          <h4 className="mb-2 text-sm font-medium text-text-accent">Year</h4>
+                          <h4 className="mb-2 text-sm font-medium text-purple-400">Year</h4>
                           <p className="text-text-secondary">{selectedProject.year}</p>
                         </div>
                         <div className="rounded-lg bg-zinc-800/50 p-4 transition-transform hover:translate-y-[-2px]">
-                          <h4 className="mb-2 text-sm font-medium text-text-accent">Duration</h4>
+                          <h4 className="mb-2 text-sm font-medium text-purple-400">Duration</h4>
                           <p className="text-text-secondary">{selectedProject.duration}</p>
                         </div>
                       </div>
@@ -689,7 +686,7 @@ export default function Portfolio() {
                         <h4 className="mb-3 text-lg font-medium text-text-heading">Technologies Used</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedProject.technologies.map((tech, index) => (
-                            <Badge key={index} className="bg-text-accent/10 text-text-accent">
+                            <Badge key={index} className="bg-purple-500/10 text-purple-400">
                               {tech}
                             </Badge>
                           ))}
@@ -704,7 +701,7 @@ export default function Portfolio() {
                               href={selectedProject.liveUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-text-accent hover:underline"
+                              className="flex items-center gap-2 text-purple-400 hover:underline"
                             >
                               <LinkIcon className="h-4 w-4" />
                               <span>Live Project: {selectedProject.liveUrl}</span>
@@ -715,13 +712,54 @@ export default function Portfolio() {
                               href={selectedProject.repoUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-text-accent hover:underline"
+                              className="flex items-center gap-2 text-purple-400 hover:underline"
                             >
                               <Github className="h-4 w-4" />
                               <span>Repository: {selectedProject.repoUrl}</span>
                             </a>
                           )}
                         </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+
+                  {/* YouTube Tab */}
+                  <TabsContent value="youtube" className="mt-4">
+                    <div className="space-y-4">
+                      <h4 className="mb-3 text-lg font-medium text-text-heading">YouTube Video</h4>
+                      <p className="text-text-secondary">
+                        This project includes a YouTube video that showcases the final result. You can watch it directly
+                        in this tab.
+                      </p>
+                    </div>
+                  </TabsContent>
+
+                  {/* Google Drive Tab */}
+                  <TabsContent value="gdrive" className="mt-4">
+                    <div className="space-y-4">
+                      <h4 className="mb-3 text-lg font-medium text-text-heading">Google Drive Files</h4>
+                      <p className="text-text-secondary mb-4">
+                        This project includes files stored on Google Drive. Select a file below to preview it.
+                      </p>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {selectedProject.googleDriveFiles?.map((file, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center p-4 rounded-lg bg-zinc-800/50 cursor-pointer hover:bg-zinc-700/50 transition-colors"
+                            onClick={() => handleGDrivePreview(file.id)}
+                          >
+                            {file.type === "image" ? (
+                              <FileImage className="h-8 w-8 text-blue-400 mr-3" />
+                            ) : (
+                              <FileVideo className="h-8 w-8 text-blue-400 mr-3" />
+                            )}
+                            <div>
+                              <h5 className="font-medium text-text-primary">{file.name}</h5>
+                              <p className="text-xs text-text-secondary capitalize">{file.type} file</p>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </TabsContent>
@@ -738,7 +776,7 @@ export default function Portfolio() {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: index * 0.1 }}
                         >
-                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-text-accent/20 text-xs font-medium text-text-accent">
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500/20 text-xs font-medium text-purple-400">
                             {index + 1}
                           </span>
                           <span className="text-text-secondary">{feature}</span>
@@ -746,27 +784,6 @@ export default function Portfolio() {
                       ))}
                     </ul>
                   </TabsContent>
-
-                  {/* Video Tab */}
-                  {selectedProject.video && (
-                    <TabsContent value="video" className="mt-4">
-                      <div className="aspect-video overflow-hidden rounded-lg bg-zinc-800">
-                        <div className="flex h-full flex-col items-center justify-center p-6 text-center">
-                          <Play className="mb-4 h-12 w-12 text-text-accent opacity-80" />
-                          <h4 className="mb-2 text-lg font-medium text-text-heading">Project Video</h4>
-                          <p className="mb-4 text-sm text-text-secondary">
-                            Click the button below to watch the project video
-                          </p>
-                          <Button
-                            className="bg-gradient-to-r from-[#5416B4] to-[#7027C3] text-white hover:opacity-90"
-                            onClick={() => window.open(selectedProject.video, "_blank")}
-                          >
-                            <Play className="mr-2 h-4 w-4" /> Watch Video
-                          </Button>
-                        </div>
-                      </div>
-                    </TabsContent>
-                  )}
                 </Tabs>
               </div>
             </>

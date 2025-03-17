@@ -69,7 +69,7 @@ export default function Testimonials() {
               className="bg-zinc-900 p-8 md:p-12 rounded-lg text-center"
             >
               <div className="flex justify-center mb-6">
-                <Quote className="h-12 w-12 text-text-accent opacity-50" />
+                <Quote className="h-12 w-12 text-purple-400 opacity-50" />
               </div>
               <p className="text-xl md:text-2xl mb-8 italic text-text-primary">"{testimonials[activeIndex].quote}"</p>
               <div className="flex items-center justify-center">
@@ -86,10 +86,20 @@ export default function Testimonials() {
             </motion.div>
 
             <div className="flex justify-center mt-8 space-x-4">
-              <Button variant="outline" size="icon" onClick={prevTestimonial} className="text-text-primary">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={prevTestimonial}
+                className="text-purple-400 hover:text-purple-300 hover:border-purple-500/30"
+              >
                 <ChevronLeft className="h-5 w-5" />
               </Button>
-              <Button variant="outline" size="icon" onClick={nextTestimonial} className="text-text-primary">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={nextTestimonial}
+                className="text-purple-400 hover:text-purple-300 hover:border-purple-500/30"
+              >
                 <ChevronRight className="h-5 w-5" />
               </Button>
             </div>
@@ -101,7 +111,7 @@ export default function Testimonials() {
                 key={index}
                 onClick={() => setActiveIndex(index)}
                 className={`w-3 h-3 mx-1 rounded-full ${
-                  index === activeIndex ? "bg-text-accent" : "bg-zinc-700"
+                  index === activeIndex ? "bg-purple-500" : "bg-zinc-700"
                 } transition-colors`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
