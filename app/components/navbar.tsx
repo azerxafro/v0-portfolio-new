@@ -44,9 +44,11 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href="#" className="flex items-center gap-3 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-purple-400">
-                <span className="text-xl font-bold text-white">AR</span>
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="Ashwin R" 
+                className="h-12 w-auto transition-transform duration-300 group-hover:scale-110"
+              />
               <span className="hidden sm:block text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
                 Ashwin R
               </span>
