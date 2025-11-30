@@ -3,7 +3,8 @@ import Navbar from "./components/navbar"
 import About from "./components/about"
 import Gallery from "./components/gallery"
 import Services from "./components/services"
-import ProjectShowcase from "./components/project-showcase"
+import Projects from "./components/projects"
+import Music from "./components/music"
 import Testimonials from "./components/testimonials"
 import Contact from "./components/contact"
 import Footer from "./components/footer"
@@ -14,9 +15,10 @@ export default function Page() {
       <Navbar />
       <Hero />
       <About />
+      <Projects />
+      <Music />
       <Services />
       <Gallery />
-      <ProjectShowcase />
       <Testimonials />
       <Contact />
       <Footer />

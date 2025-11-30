@@ -19,19 +19,20 @@ export default function About() {
   const [isImageLoading, setIsImageLoading] = useState(true)
 
   const skills = [
+    { name: "Cybersecurity (Kali Linux)", level: 90 },
+    { name: "Python & AI/ML", level: 85 },
     { name: "Adobe Premiere Pro", level: 90 },
     { name: "Adobe After Effects", level: 80 },
-    { name: "DaVinci Resolve", level: 60 },
-    { name: "Adobe Photoshop", level: 70 },
-    { name: "Shopify", level: 65 },
+    { name: "Music Production", level: 75 },
   ]
 
   const software = [
-    { name: "Adobe Premiere Pro", icon: "🎬" },
+    { name: "Kali Linux", icon: "🐧" },
+    { name: "Burp Suite", icon: "🔒" },
+    { name: "Python", icon: "🐍" },
+    { name: "Premiere Pro", icon: "🎬" },
     { name: "After Effects", icon: "✨" },
     { name: "DaVinci Resolve", icon: "🎨" },
-    { name: "Photoshop", icon: "📷" },
-    { name: "Shopify", icon: "🛍️" },
   ]
 
   const experiences = [
@@ -123,29 +124,23 @@ export default function About() {
               {/* Bio Column */}
               <div className="col-span-3 p-8 lg:p-12">
                 <h3 className="mb-3 text-3xl font-bold text-text-heading">Ashwin Azer</h3>
-                <h4 className="mb-6 text-lg text-text-accent">Video Editor • Music Artist • Content Creator</h4>
+                <h4 className="mb-6 text-lg text-text-accent">Video Editor • Music Artist • Developer</h4>
 
                 <div className="mb-6">
                   <div
                     className={`relative overflow-hidden transition-all duration-500 ${bioExpanded ? "max-h-[1000px]" : "max-h-28"}`}
                   >
                     <p className="mb-4 text-text-primary">
-                      Hello! I&apos;m Ashwin Azer, a passionate video editor and content creator specializing in engaging visual
-                      storytelling, professional editing, and creative content production.
+                      I&apos;m Ashwin Ramesh, known professionally as <strong>Ashwin Azer</strong> (and <em>azerxafro</em> in the dev world). I operate at the intersection of creative storytelling and technical innovation.
                     </p>
                     <p className="mb-4 text-text-primary">
-                      My expertise spans across video editing using Adobe Premiere Pro and DaVinci Resolve, motion graphics
-                      with After Effects, and creating compelling content for YouTube, social media, and digital platforms.
-                      I bring stories to life through meticulous attention to pacing, transitions, and narrative flow.
+                      As a <strong>Music Artist</strong>, I blend Hip-Hop, Rap, and Indie styles, collaborating with artists like Saileshxafro and Wa&apos;Cali. My tracks like &quot;Raatchasi&quot; and &quot;Pikachu&quot; reflect a raw, authentic vibe.
                     </p>
                     <p className="mb-4 text-text-primary">
-                      I&apos;ve worked on diverse projects including movie analysis videos, promotional content, short films,
-                      and social media reels. My approach combines technical proficiency with creative vision to deliver
-                      content that captivates audiences and drives engagement.
+                      On the tech side, I&apos;m a <strong>Developer</strong> and Security Enthusiast. From building AI-powered security platforms like <em>Atoms.Ninja</em> to modernizing OSINT tools, I bring a hacker&apos;s mindset to solving problems.
                     </p>
                     <p className="text-text-primary">
-                      Whether it&apos;s analyzing box office trends, creating viral shorts, or editing feature-length content,
-                      I&apos;m dedicated to pushing creative boundaries and delivering exceptional results on every project.
+                      Whether I&apos;m dropping bars, editing visuals, or writing code, I keep it real and push boundaries.
                     </p>
                     {!bioExpanded && (
                       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-zinc-800/80 to-transparent"></div>
@@ -169,19 +164,19 @@ export default function About() {
 
                 <div className="flex flex-wrap gap-3">
                   <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
-                    Premiere Pro
+                    Cybersecurity
                   </Badge>
                   <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
-                    After Effects
+                    AI/ML
                   </Badge>
                   <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
-                    DaVinci Resolve
+                    Hip-Hop
                   </Badge>
                   <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
-                    Content Creation
+                    Video Editing
                   </Badge>
                   <Badge variant="secondary" className="bg-purple-700/30 hover:bg-purple-600/40 text-white">
-                    YouTube
+                    Python
                   </Badge>
                 </div>
               </div>

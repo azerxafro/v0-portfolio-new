@@ -307,7 +307,7 @@ export default function Hero() {
           <span className="text-purple-400">•</span>
           <span className="animate-fade-in" style={{ animationDelay: '0.2s' }}>Music Artist</span>
           <span className="text-purple-400">•</span>
-          <span className="animate-fade-in" style={{ animationDelay: '0.4s' }}>Content Creator</span>
+          <span className="animate-fade-in" style={{ animationDelay: '0.4s' }}>Developer</span>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
