@@ -287,7 +287,7 @@ export default function Hero() {
         >
           <p className="text-xl sm:text-2xl text-gray-300 mb-2">Hello, I'm</p>
           <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 bg-clip-text text-transparent">
-            Ashwin R
+            Ashwin Azer
           </h1>
         </motion.div>
         <motion.div

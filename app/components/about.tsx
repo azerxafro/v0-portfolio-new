@@ -103,7 +103,7 @@ export default function About() {
                 <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-purple-700 lg:h-80 lg:w-80">
                   <img
                     src="/assets/portrait.jpg"
-                    alt="Ashwin R"
+                    alt="Ashwin Azer"
                     className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
                   />
                   <div className="absolute inset-0 rounded-full border-8 border-text-accent/10"></div>
@@ -112,7 +112,7 @@ export default function About() {
 
               {/* Bio Column */}
               <div className="col-span-3 p-8 lg:p-12">
-                <h3 className="mb-3 text-3xl font-bold text-text-heading">Ashwin R</h3>
+                <h3 className="mb-3 text-3xl font-bold text-text-heading">Ashwin Azer</h3>
                 <h4 className="mb-6 text-lg text-text-accent">Video Editor • Music Artist • Content Creator</h4>
 
                 <div className="mb-6">
@@ -120,7 +120,7 @@ export default function About() {
                     className={`relative overflow-hidden transition-all duration-500 ${bioExpanded ? "max-h-[1000px]" : "max-h-28"}`}
                   >
                     <p className="mb-4 text-text-primary">
-                      Hello! I'm Ashwin R, a passionate video editor and content creator specializing in engaging visual
+                      Hello! I'm Ashwin Azer, a passionate video editor and content creator specializing in engaging visual
                       storytelling, professional editing, and creative content production.
                     </p>
                     <p className="mb-4 text-text-primary">

@@ -5,8 +5,8 @@ import type React from "react"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Ashwin R - Video Editor & Content Creator",
-  description: "Professional video editor specializing in engaging visual storytelling, color grading, and motion graphics. Portfolio showcasing YouTube content, movie analysis, and creative projects.",
+  title: "Ashwin Azer - Video Editor & Content Creator",
+  description: "Professional video editor specializing in engaging visual storytelling, color grading, and motion graphics. Based in Coimbatore, India. Portfolio showcasing YouTube content, movie analysis, and creative projects.",
   generator: 'v0.dev',
   icons: {
     icon: [

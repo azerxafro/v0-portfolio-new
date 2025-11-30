@@ -1,10 +1,12 @@
 // Portfolio data migrated from Project A
 export const personalInfo = {
-  name: "Ashwin R",
+  name: "Ashwin Azer",
   title: "Video Editor",
   roles: ["Video Editor", "Music Artist", "Content Creator"],
   bio: "Professional video editor and content creator specializing in engaging visual storytelling, color grading, and motion graphics.",
-  email: "contact@ashwinr.com",
+  email: "ashwinazer@hotmail.com",
+  phone: "+918778222061",
+  location: "Coimbatore, India",
   cvUrl: "/assets/cv.pdf",
   profileImage: "/assets/portrait.jpg",
   bannerImage: "/assets/banner.png"

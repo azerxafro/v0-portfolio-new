@@ -70,7 +70,9 @@ export default function Contact() {
                 <Mail className="h-5 w-5 mr-3 text-purple-400 mt-0.5" />
                 <div>
                   <h4 className="font-medium text-text-heading">Email</h4>
-                  <p className="text-text-secondary">ashwin.r@example.com</p>
+                  <a href="mailto:ashwinazer@hotmail.com" className="text-purple-400 hover:text-purple-300 transition-colors">
+                    ashwinazer@hotmail.com
+                  </a>
                 </div>
               </div>
 
@@ -78,7 +80,9 @@ export default function Contact() {
                 <Phone className="h-5 w-5 mr-3 text-purple-400 mt-0.5" />
                 <div>
                   <h4 className="font-medium text-text-heading">Phone</h4>
-                  <p className="text-text-secondary">+1 (555) 123-4567</p>
+                  <a href="tel:+918778222061" className="text-purple-400 hover:text-purple-300 transition-colors">
+                    +91 87782 22061
+                  </a>
                 </div>
               </div>
 
@@ -86,7 +90,7 @@ export default function Contact() {
                 <MapPin className="h-5 w-5 mr-3 text-purple-400 mt-0.5" />
                 <div>
                   <h4 className="font-medium text-text-heading">Location</h4>
-                  <p className="text-text-secondary">Los Angeles, California</p>
+                  <p className="text-text-secondary">Coimbatore, India</p>
                 </div>
               </div>
 
@@ -94,7 +98,7 @@ export default function Contact() {
                 <Clock className="h-5 w-5 mr-3 text-purple-400 mt-0.5" />
                 <div>
                   <h4 className="font-medium text-text-heading">Working Hours</h4>
-                  <p className="text-text-secondary">Monday - Friday: 9am - 6pm</p>
+                  <p className="text-text-secondary">Monday - Friday: 9am - 6pm IST</p>
                 </div>
               </div>
             </div>

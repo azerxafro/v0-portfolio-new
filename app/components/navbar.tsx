@@ -46,11 +46,11 @@ export default function Navbar() {
             <a href="#" className="flex items-center gap-3 group">
               <img 
                 src="/logo.png" 
-                alt="Ashwin R" 
+                alt="Ashwin Azer" 
                 className="h-12 w-auto transition-transform duration-300 group-hover:scale-110"
               />
               <span className="hidden sm:block text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
-                Ashwin R
+                Ashwin Azer
               </span>
             </a>
 
