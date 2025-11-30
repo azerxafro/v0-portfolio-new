@@ -54,7 +54,7 @@ export default function Testimonials() {
         >
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-4">Client Testimonials</h2>
           <p className="max-w-2xl mx-auto text-text-secondary">
-            Don't just take my word for it. Here's what my clients have to say about working with me.
+            Don&apos;t just take my word for it. Here&apos;s what my clients have to say about working with me.
           </p>
         </motion.div>
 
@@ -71,7 +71,7 @@ export default function Testimonials() {
               <div className="flex justify-center mb-6">
                 <Quote className="h-12 w-12 text-purple-400 opacity-50" />
               </div>
-              <p className="text-xl md:text-2xl mb-8 italic text-text-primary">"{testimonials[activeIndex].quote}"</p>
+              <p className="text-xl md:text-2xl mb-8 italic text-text-primary">&quot;{testimonials[activeIndex].quote}&quot;</p>
               <div className="flex items-center justify-center">
                 <img
                   src={testimonials[activeIndex].image || "/placeholder.svg"}
@@ -110,9 +110,8 @@ export default function Testimonials() {
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`w-3 h-3 mx-1 rounded-full ${
-                  index === activeIndex ? "bg-purple-500" : "bg-zinc-700"
-                } transition-colors`}
+                className={`w-3 h-3 mx-1 rounded-full ${index === activeIndex ? "bg-purple-500" : "bg-zinc-700"
+                  } transition-colors`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}

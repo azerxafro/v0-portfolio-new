@@ -4,6 +4,13 @@ import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
 
+interface Particle {
+  x: number
+  y: number
+  update(mouseX: number, mouseY: number, isMouseInCanvas: boolean): void
+  draw(ctx: CanvasRenderingContext2D): void
+}
+
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -285,7 +292,7 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="mb-4"
         >
-          <p className="text-xl sm:text-2xl text-gray-300 mb-2">Hello, I'm</p>
+          <p className="text-xl sm:text-2xl text-gray-300 mb-2">Hello, I&apos;m</p>
           <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 bg-clip-text text-transparent">
             Ashwin Azer
           </h1>

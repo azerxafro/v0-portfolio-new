@@ -278,7 +278,7 @@ export default function AssetManagement() {
                         Running your site locally with{" "}
                         <code className="bg-zinc-800 px-1 py-0.5 rounded text-purple-300">npm run dev</code>
                       </li>
-                      <li>Clicking the "Download CV" button in the navigation</li>
+                      <li>Clicking the &quot;Download CV&quot; button in the navigation</li>
                       <li>Verifying that the correct file downloads</li>
                     </ol>
                   </div>
@@ -287,8 +287,8 @@ export default function AssetManagement() {
                     <Info className="h-4 w-4 text-purple-400" />
                     <AlertTitle>Pro Tip</AlertTitle>
                     <AlertDescription>
-                      Consider creating an ATS-friendly version of your CV that's optimized for applicant tracking
-                      systems, as well as a visually appealing version that matches your portfolio's design aesthetic.
+                      Consider creating an ATS-friendly version of your CV that&apos;s optimized for applicant tracking
+                      systems, as well as a visually appealing version that matches your portfolio&apos;s design aesthetic.
                     </AlertDescription>
                   </Alert>
                 </CardContent>

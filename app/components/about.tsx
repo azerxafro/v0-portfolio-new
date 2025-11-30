@@ -120,7 +120,7 @@ export default function About() {
                     className={`relative overflow-hidden transition-all duration-500 ${bioExpanded ? "max-h-[1000px]" : "max-h-28"}`}
                   >
                     <p className="mb-4 text-text-primary">
-                      Hello! I'm Ashwin Azer, a passionate video editor and content creator specializing in engaging visual
+                      Hello! I&apos;m Ashwin Azer, a passionate video editor and content creator specializing in engaging visual
                       storytelling, professional editing, and creative content production.
                     </p>
                     <p className="mb-4 text-text-primary">
@@ -129,13 +129,13 @@ export default function About() {
                       I bring stories to life through meticulous attention to pacing, transitions, and narrative flow.
                     </p>
                     <p className="mb-4 text-text-primary">
-                      I've worked on diverse projects including movie analysis videos, promotional content, short films,
+                      I&apos;ve worked on diverse projects including movie analysis videos, promotional content, short films,
                       and social media reels. My approach combines technical proficiency with creative vision to deliver
                       content that captivates audiences and drives engagement.
                     </p>
                     <p className="text-text-primary">
-                      Whether it's analyzing box office trends, creating viral shorts, or editing feature-length content,
-                      I'm dedicated to pushing creative boundaries and delivering exceptional results on every project.
+                      Whether it&apos;s analyzing box office trends, creating viral shorts, or editing feature-length content,
+                      I&apos;m dedicated to pushing creative boundaries and delivering exceptional results on every project.
                     </p>
                     {!bioExpanded && (
                       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-zinc-800/80 to-transparent"></div>
