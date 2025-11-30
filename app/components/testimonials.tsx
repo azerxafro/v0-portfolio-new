@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 import { motion } from "framer-motion"
 import { useRef, useState } from "react"
 import { useInView } from "framer-motion"
@@ -73,10 +75,12 @@ export default function Testimonials() {
               </div>
               <p className="text-xl md:text-2xl mb-8 italic text-text-primary">&quot;{testimonials[activeIndex].quote}&quot;</p>
               <div className="flex items-center justify-center">
-                <img
+                <Image
                   src={testimonials[activeIndex].image || "/placeholder.svg"}
                   alt={testimonials[activeIndex].author}
-                  className="w-16 h-16 rounded-full mr-4 object-cover"
+                  width={64}
+                  height={64}
+                  className="rounded-full mr-4 object-cover"
                 />
                 <div className="text-left">
                   <h4 className="font-semibold text-text-heading">{testimonials[activeIndex].author}</h4>

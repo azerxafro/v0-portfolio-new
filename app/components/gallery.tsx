@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 import { motion } from "framer-motion"
 import { useRef, useState } from "react"
 import { useInView } from "framer-motion"
@@ -94,10 +96,11 @@ export default function Gallery() {
                 transition={{ duration: 0.8, delay: index * 0.15 }}
               >
                 <div className="aspect-video overflow-hidden relative">
-                  <img
+                  <Image
                     src={video.thumbnail || "/placeholder.svg"}
                     alt={video.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button
@@ -130,10 +133,11 @@ export default function Gallery() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
               >
                 <div className="aspect-[9/16] overflow-hidden relative">
-                  <img
+                  <Image
                     src={reel.thumbnail || "/placeholder.svg"}
                     alt={reel.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent">
                     <div className="absolute bottom-0 left-0 right-0 p-4">

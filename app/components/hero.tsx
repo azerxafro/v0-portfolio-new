@@ -13,8 +13,8 @@ interface Particle {
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isMouseInCanvas, setIsMouseInCanvas] = useState(false)
+  const mousePositionRef = useRef({ x: 0, y: 0 })
+  const isMouseInCanvasRef = useRef(false)
   const animationFrameRef = useRef<number | null>(null)
   const particlesRef = useRef<Particle[]>([])
   const touchTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -135,7 +135,7 @@ export default function Hero() {
 
       // Update and draw particles
       for (const particle of particlesRef.current) {
-        particle.update(mousePosition.x, mousePosition.y, isMouseInCanvas)
+        particle.update(mousePositionRef.current.x, mousePositionRef.current.y, isMouseInCanvasRef.current)
         particle.draw(ctx)
       }
 
@@ -175,36 +175,36 @@ export default function Hero() {
     // Mouse event handlers
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
-      setMousePosition({
+      mousePositionRef.current = {
         x: e.clientX - rect.left,
         y: e.clientY - rect.top,
-      })
+      }
     }
 
     const handleMouseEnter = () => {
-      setIsMouseInCanvas(true)
+      isMouseInCanvasRef.current = true
     }
 
     const handleMouseLeave = () => {
-      setIsMouseInCanvas(false)
+      isMouseInCanvasRef.current = false
     }
 
     // Touch event handlers for mobile
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length > 0) {
         const rect = canvas.getBoundingClientRect()
-        setMousePosition({
+        mousePositionRef.current = {
           x: e.touches[0].clientX - rect.left,
           y: e.touches[0].clientY - rect.top,
-        })
-        setIsMouseInCanvas(true)
+        }
+        isMouseInCanvasRef.current = true
 
         // Auto-disable touch effect after a delay
         if (touchTimeoutRef.current) {
           clearTimeout(touchTimeoutRef.current)
         }
         touchTimeoutRef.current = setTimeout(() => {
-          setIsMouseInCanvas(false)
+          isMouseInCanvasRef.current = false
         }, 3000)
       }
     }
@@ -212,17 +212,17 @@ export default function Hero() {
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
         const rect = canvas.getBoundingClientRect()
-        setMousePosition({
+        mousePositionRef.current = {
           x: e.touches[0].clientX - rect.left,
           y: e.touches[0].clientY - rect.top,
-        })
+        }
 
         // Reset the auto-disable timeout
         if (touchTimeoutRef.current) {
           clearTimeout(touchTimeoutRef.current)
         }
         touchTimeoutRef.current = setTimeout(() => {
-          setIsMouseInCanvas(false)
+          isMouseInCanvasRef.current = false
         }, 3000)
       }
     }
@@ -233,7 +233,7 @@ export default function Hero() {
         clearTimeout(touchTimeoutRef.current)
       }
       touchTimeoutRef.current = setTimeout(() => {
-        setIsMouseInCanvas(false)
+        isMouseInCanvasRef.current = false
       }, 1000)
     }
 

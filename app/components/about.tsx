@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 import { motion } from "framer-motion"
 import { useRef, useState } from "react"
 import { useInView } from "framer-motion"
@@ -101,10 +103,11 @@ export default function About() {
               {/* Image Column */}
               <div className="relative col-span-2 flex items-center justify-center p-8 lg:p-12">
                 <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-purple-700 lg:h-80 lg:w-80">
-                  <img
+                  <Image
                     src="/assets/portrait.jpg"
                     alt="Ashwin Azer"
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-700 hover:scale-110"
                   />
                   <div className="absolute inset-0 rounded-full border-8 border-text-accent/10"></div>
                 </div>

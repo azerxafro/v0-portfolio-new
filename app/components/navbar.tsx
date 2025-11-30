@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Menu, X, Download } from "lucide-react"
@@ -44,9 +46,11 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href="#" className="flex items-center gap-3 group">
-              <img 
+              <Image 
                 src="/logo.png" 
                 alt="Ashwin Azer" 
+                width={48}
+                height={48}
                 className="h-12 w-auto transition-transform duration-300 group-hover:scale-110"
               />
               <span className="hidden sm:block text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
