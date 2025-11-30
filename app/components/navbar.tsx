@@ -59,28 +59,24 @@ export default function Navbar() {
             </a>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-sm text-gray-300 hover:text-purple-400 transition-all duration-300 relative group"
+                  className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group active:scale-95 duration-200"
                 >
                   {link.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-purple-400 group-hover:w-full transition-all duration-300"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
                 </a>
               ))}
-            </div>
-
-            {/* Download CV Button - Desktop */}
-            <div className="hidden md:block">
               <a
                 href="/assets/cv.pdf"
                 download="Ashwin-R-CV.pdf"
-                className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-purple-600 to-purple-500 px-4 py-2 text-sm font-medium text-white hover:from-purple-500 hover:to-purple-400 hover:shadow-lg hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-medium transition-all duration-300 hover:shadow-[0_0_20px_rgba(147,51,234,0.5)] hover:-translate-y-0.5 active:scale-95"
               >
-                <Download className="h-4 w-4" />
-                Download CV
+                <Download className="w-4 h-4" />
+                <span>Resume</span>
               </a>
             </div>
 

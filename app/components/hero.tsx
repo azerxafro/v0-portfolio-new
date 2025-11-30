@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowDown } from "lucide-react"
+import { ArrowDown, ArrowRight } from "lucide-react"
 
 interface Particle {
   x: number
@@ -312,15 +312,26 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button
-            onClick={scrollToAbout}
-            className="flex items-center justify-center rounded-full bg-purple-500/10 p-3 backdrop-blur-sm hover:bg-purple-500/20 transition-colors"
-            aria-label="Scroll down"
+          <a
+            href="#works"
+            className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:-translate-y-1 active:scale-95"
           >
-            <ArrowDown className="h-6 w-6 text-purple-400" />
-          </button>
+            <span className="relative z-10 flex items-center gap-2">
+              View My Work
+              <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+          </a>
+          
+          <a
+            href="#contact"
+            className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/40 hover:-translate-y-1 active:scale-95"
+          >
+            Contact Me
+          </a>
         </motion.div>
       </div>
     </div>

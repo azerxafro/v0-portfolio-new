@@ -1,6 +1,8 @@
 "use client"
 
 import Image from "next/image"
+import { Skeleton } from "@/components/ui/skeleton"
+import { cn } from "@/lib/utils"
 
 import { motion } from "framer-motion"
 import { useRef, useState } from "react"
@@ -14,6 +16,7 @@ export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
   const [bioExpanded, setBioExpanded] = useState(false)
+  const [isImageLoading, setIsImageLoading] = useState(true)
 
   const skills = [
     { name: "Adobe Premiere Pro", level: 90 },
@@ -101,13 +104,17 @@ export default function About() {
           >
             <div className="grid grid-cols-1 lg:grid-cols-5">
               {/* Image Column */}
+
+
               <div className="relative col-span-2 flex items-center justify-center p-8 lg:p-12">
                 <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-purple-700 lg:h-80 lg:w-80">
+                  {isImageLoading && <Skeleton className="absolute inset-0 h-full w-full rounded-full" />}
                   <Image
                     src="/assets/portrait.jpg"
                     alt="Ashwin Azer"
                     fill
-                    className="object-cover transition-transform duration-700 hover:scale-110"
+                    className={cn("object-cover transition-transform duration-700 hover:scale-110", isImageLoading ? "opacity-0" : "opacity-100")}
+                    onLoad={() => setIsImageLoading(false)}
                   />
                   <div className="absolute inset-0 rounded-full border-8 border-text-accent/10"></div>
                 </div>

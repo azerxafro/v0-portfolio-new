@@ -8,6 +8,27 @@ import { useInView } from "framer-motion"
 import { Play, X } from "lucide-react"
 import YouTubeEmbed from "./youtube-embed"
 
+import { Skeleton } from "@/components/ui/skeleton"
+import { cn } from "@/lib/utils"
+
+// Helper component for images with skeleton loading
+const ImageWithSkeleton = ({ src, alt, className, ...props }: any) => {
+  const [isLoading, setIsLoading] = useState(true)
+
+  return (
+    <div className="relative h-full w-full">
+      {isLoading && <Skeleton className="absolute inset-0 h-full w-full rounded-none" />}
+      <Image
+        src={src}
+        alt={alt}
+        className={cn(className, isLoading ? "opacity-0" : "opacity-100")}
+        onLoad={() => setIsLoading(false)}
+        {...props}
+      />
+    </div>
+  )
+}
+
 export default function Gallery() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
@@ -96,7 +117,7 @@ export default function Gallery() {
                 transition={{ duration: 0.8, delay: index * 0.15 }}
               >
                 <div className="aspect-video overflow-hidden relative">
-                  <Image
+                  <ImageWithSkeleton
                     src={video.thumbnail || "/placeholder.svg"}
                     alt={video.title}
                     fill
@@ -133,7 +154,7 @@ export default function Gallery() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
               >
                 <div className="aspect-[9/16] overflow-hidden relative">
-                  <Image
+                  <ImageWithSkeleton
                     src={reel.thumbnail || "/placeholder.svg"}
                     alt={reel.title}
                     fill
