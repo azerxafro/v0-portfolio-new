@@ -28,7 +28,7 @@ export default function ProjectShowcase() {
     {
       title: "Leo Movie - Insider Leaks",
       publishDate: "September 2023",
-      img: "https://img.youtube.com/vi/cftXsjqSvk4/maxresdefault.jpg",
+      img: "https://img.youtube.com/vi/cftXsjqSvk4/hqdefault.jpg",
       description: "An engaging video about the insider leaks and behind-the-scenes details of the movie 'LEO' starring Thalapathy Vijay.",
       tags: ["Video Editing", "YouTube Content", "Movie Analysis"],
       videoUrl: "https://www.youtube.com/watch?v=cftXsjqSvk4",
@@ -42,7 +42,7 @@ export default function ProjectShowcase() {
     {
       title: "Jailer Movie - Box Office Analysis",
       publishDate: "August 2023",
-      img: "https://img.youtube.com/vi/NmjookhHR0A/maxresdefault.jpg",
+      img: "https://img.youtube.com/vi/NmjookhHR0A/hqdefault.jpg",
       description: "A detailed analysis of Jailer movie's box office performance and its impact on the Indian film industry.",
       tags: ["Video Editing", "Data Analysis", "Movie Business"],
       videoUrl: "https://www.youtube.com/watch?v=NmjookhHR0A",
@@ -56,7 +56,7 @@ export default function ProjectShowcase() {
     {
       title: "Varisu vs Thunivu - Battle Analysis",
       publishDate: "January 2023",
-      img: "https://img.youtube.com/vi/NqBPVIgttZM/maxresdefault.jpg",
+      img: "https://img.youtube.com/vi/NqBPVIgttZM/hqdefault.jpg",
       description: "A comparative analysis of two major Pongal releases - Varisu and Thunivu, breaking down their box office performance and audience reception.",
       tags: ["Comparative Analysis", "Box Office Study", "Movie Review"],
       videoUrl: "https://www.youtube.com/watch?v=NqBPVIgttZM",
@@ -71,7 +71,7 @@ export default function ProjectShowcase() {
     {
       title: "Vikram Movie - Success Story",
       publishDate: "June 2022",
-      img: "https://img.youtube.com/vi/v7GFrJc_Fv4/maxresdefault.jpg",
+      img: "https://img.youtube.com/vi/v7GFrJc_Fv4/hqdefault.jpg",
       description: "An analysis of Vikram movie's phenomenal success and its impact on Tamil cinema.",
       tags: ["Success Analysis", "Movie Business", "Industry Impact"],
       videoUrl: "https://www.youtube.com/watch?v=v7GFrJc_Fv4",

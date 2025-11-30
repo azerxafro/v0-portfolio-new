@@ -15,25 +15,25 @@ export default function Gallery() {
     {
       title: "Leo Insider leaks - LetsFame App",
       url: "https://www.youtube.com/watch?v=cftXsjqSvk4",
-      thumbnail: "https://img.youtube.com/vi/cftXsjqSvk4/maxresdefault.jpg",
+      thumbnail: "https://img.youtube.com/vi/cftXsjqSvk4/hqdefault.jpg",
       description: "Insider leaks and behind-the-scenes details of LEO"
     },
     {
       title: "Jawan Trailer Reaction - LetsFame App",
       url: "https://www.youtube.com/watch?v=tPeaVYRsU_I",
-      thumbnail: "https://img.youtube.com/vi/tPeaVYRsU_I/maxresdefault.jpg",
+      thumbnail: "https://img.youtube.com/vi/tPeaVYRsU_I/hqdefault.jpg",
       description: "Professional reaction and analysis of Jawan trailer"
     },
     {
       title: "Tom Collins - Short Film Teaser",
       url: "https://www.youtube.com/watch?v=v7GFrJc_Fv4",
-      thumbnail: "https://img.youtube.com/vi/v7GFrJc_Fv4/maxresdefault.jpg",
+      thumbnail: "https://img.youtube.com/vi/v7GFrJc_Fv4/hqdefault.jpg",
       description: "Professionally edited short film teaser"
     },
     {
       title: "7D - Feature Film Promotion Video",
       url: "https://youtu.be/L2Bk6l8ISjM",
-      thumbnail: "https://img.youtube.com/vi/L2Bk6l8ISjM/maxresdefault.jpg",
+      thumbnail: "https://img.youtube.com/vi/L2Bk6l8ISjM/hqdefault.jpg",
       description: "High-quality promotional video for feature film"
     }
   ]
@@ -42,22 +42,22 @@ export default function Gallery() {
     {
       title: "Doctor Towels - Public Interview",
       url: "https://youtube.com/shorts/bu_01s9m-kE",
-      thumbnail: "/assets/stock-2.jpg"
+      thumbnail: "https://img.youtube.com/vi/bu_01s9m-kE/hqdefault.jpg"
     },
     {
       title: "Doctor Towels - Public Interview-2",
       url: "https://youtube.com/shorts/idJmucSItKc",
-      thumbnail: "/assets/stock-4.jpg"
+      thumbnail: "https://img.youtube.com/vi/idJmucSItKc/hqdefault.jpg"
     },
     {
       title: "Acne - Breakdown",
       url: "https://youtube.com/shorts/4O4kfq_jwtg?feature=shared",
-      thumbnail: "/assets/stock-3.jpg"
+      thumbnail: "https://img.youtube.com/vi/4O4kfq_jwtg/hqdefault.jpg"
     },
     {
       title: "Breast Implant - Essentials",
       url: "https://www.youtube.com/shorts/7JsrfNlCBpg",
-      thumbnail: "/assets/stock-1.jpg"
+      thumbnail: "https://img.youtube.com/vi/7JsrfNlCBpg/hqdefault.jpg"
     }
   ]
 
