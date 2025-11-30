@@ -58,9 +58,10 @@ export default function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-sm text-text-secondary hover:text-purple-400 transition-colors"
+                  className="text-sm text-gray-300 hover:text-purple-400 transition-all duration-300 relative group"
                 >
                   {link.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-purple-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
               ))}
             </div>
@@ -70,7 +71,7 @@ export default function Navbar() {
               <a
                 href="/assets/cv.pdf"
                 download="Ashwin-R-CV.pdf"
-                className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-purple-700 to-purple-500 px-4 py-2 text-sm font-medium text-white hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+                className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-purple-600 to-purple-500 px-4 py-2 text-sm font-medium text-white hover:from-purple-500 hover:to-purple-400 hover:shadow-lg hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300"
               >
                 <Download className="h-4 w-4" />
                 Download CV
