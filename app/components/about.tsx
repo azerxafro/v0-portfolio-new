@@ -111,7 +111,7 @@ export default function About() {
                 <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-purple-700 lg:h-80 lg:w-80">
                   {isImageLoading && <Skeleton className="absolute inset-0 h-full w-full rounded-full" />}
                   <Image
-                    src="/assets/portrait.jpg"
+                    src="/assets/portrait-new.jpg"
                     alt="Ashwin Azer"
                     fill
                     className={cn("object-cover transition-transform duration-700 hover:scale-110", isImageLoading ? "opacity-0" : "opacity-100")}
