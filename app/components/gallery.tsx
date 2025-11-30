@@ -15,25 +15,25 @@ export default function Gallery() {
     {
       title: "Leo Insider leaks - LetsFame App",
       url: "https://www.youtube.com/watch?v=cftXsjqSvk4",
-      thumbnail: "/assets/stock-2.jpg",
+      thumbnail: "https://img.youtube.com/vi/cftXsjqSvk4/maxresdefault.jpg",
       description: "Insider leaks and behind-the-scenes details of LEO"
     },
     {
       title: "Jawan Trailer Reaction - LetsFame App",
       url: "https://www.youtube.com/watch?v=tPeaVYRsU_I",
-      thumbnail: "/assets/stock-4.jpg",
+      thumbnail: "https://img.youtube.com/vi/tPeaVYRsU_I/maxresdefault.jpg",
       description: "Professional reaction and analysis of Jawan trailer"
     },
     {
       title: "Tom Collins - Short Film Teaser",
       url: "https://www.youtube.com/watch?v=v7GFrJc_Fv4",
-      thumbnail: "/assets/stock-3.jpg",
+      thumbnail: "https://img.youtube.com/vi/v7GFrJc_Fv4/maxresdefault.jpg",
       description: "Professionally edited short film teaser"
     },
     {
       title: "7D - Feature Film Promotion Video",
       url: "https://youtu.be/L2Bk6l8ISjM",
-      thumbnail: "/assets/stock-1.jpg",
+      thumbnail: "https://img.youtube.com/vi/L2Bk6l8ISjM/maxresdefault.jpg",
       description: "High-quality promotional video for feature film"
     }
   ]
