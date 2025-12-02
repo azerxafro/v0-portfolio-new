@@ -47,7 +47,7 @@ export default function Navbar() {
             {/* Logo */}
             <a href="#" className="flex items-center gap-3 group">
               <Image 
-                src="/logo.png" 
+                src="/logo-small.png" 
                 alt="Ashwin Azer" 
                 width={48}
                 height={48}

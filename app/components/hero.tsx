@@ -293,7 +293,7 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <div className="relative w-48 h-48 sm:w-64 sm:h-64 mx-auto">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto">
             <Image
               src="/logo.png"
               alt="Ashwin Azer Logo"
