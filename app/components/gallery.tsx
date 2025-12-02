@@ -107,7 +107,7 @@ export default function Gallery() {
         {/* YouTube Videos Section */}
         <div className="mb-16">
           <h3 className="mb-8 text-2xl font-semibold text-purple-400">YouTube Videos</h3>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
+          <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-2">
             {youtubeVideos.map((video, index) => (
               <motion.div
                 key={index}

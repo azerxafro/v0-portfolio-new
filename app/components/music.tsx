@@ -142,7 +142,7 @@ export default function Music() {
               <h3 className="text-2xl font-bold text-white mb-2">Listen Now</h3>
               <p className="text-zinc-400">Find my music on your favorite streaming platform.</p>
             </div>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center md:justify-end gap-3 sm:gap-4">
               {platforms.map((platform, index) => (
                 <motion.a
                   key={index}

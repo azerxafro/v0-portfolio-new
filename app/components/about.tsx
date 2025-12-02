@@ -108,7 +108,7 @@ export default function About() {
 
 
               <div className="relative col-span-2 flex items-center justify-center p-8 lg:p-12">
-                <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-purple-700 lg:h-80 lg:w-80">
+                <div className="relative h-48 w-48 sm:h-64 sm:w-64 overflow-hidden rounded-full border-4 border-purple-700 lg:h-80 lg:w-80">
                   {isImageLoading && <Skeleton className="absolute inset-0 h-full w-full rounded-full" />}
                   <Image
                     src="/assets/portrait-new.jpg"
@@ -186,10 +186,10 @@ export default function About() {
           {/* Tabs Section */}
           <motion.div variants={itemVariants}>
             <Tabs defaultValue="skills" className="w-full">
-              <TabsList className="mx-auto mb-8 grid w-full max-w-md grid-cols-3">
-                <TabsTrigger value="skills">Skills</TabsTrigger>
-                <TabsTrigger value="software">Software</TabsTrigger>
-                <TabsTrigger value="experience">Experience</TabsTrigger>
+              <TabsList className="mx-auto mb-8 grid w-full max-w-md grid-cols-3 h-auto p-1">
+                <TabsTrigger value="skills" className="py-2 text-xs sm:text-sm">Skills</TabsTrigger>
+                <TabsTrigger value="software" className="py-2 text-xs sm:text-sm">Software</TabsTrigger>
+                <TabsTrigger value="experience" className="py-2 text-xs sm:text-sm">Experience</TabsTrigger>
               </TabsList>
 
               {/* Skills Tab */}

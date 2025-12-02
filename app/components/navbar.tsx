@@ -96,7 +96,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <motion.div
-          className="fixed inset-0 z-40 bg-black pt-20"
+          className="fixed inset-0 z-40 bg-black/95 backdrop-blur-md pt-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

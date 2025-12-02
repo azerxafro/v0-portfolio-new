@@ -293,7 +293,7 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto">
+          <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto">
             <Image
               src="/logo.png"
               alt="Ashwin Azer Logo"
@@ -311,7 +311,7 @@ export default function Hero() {
           className="mb-4"
         >
           <p className="text-xl sm:text-2xl text-gray-300 mb-2">Hello, I&apos;m</p>
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 bg-clip-text text-transparent">
             Ashwin Azer
           </h1>
         </motion.div>
@@ -331,11 +331,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-4 sm:px-0"
         >
           <a
             href="#works"
-            className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:-translate-y-1 active:scale-95"
+            className="group relative w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:-translate-y-1 active:scale-95 flex justify-center"
           >
             <span className="relative z-10 flex items-center gap-2">
               View My Work
@@ -346,7 +346,7 @@ export default function Hero() {
           
           <a
             href="#contact"
-            className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/40 hover:-translate-y-1 active:scale-95"
+            className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-bold text-lg backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/40 hover:-translate-y-1 active:scale-95 flex justify-center"
           >
             Contact Me
           </a>

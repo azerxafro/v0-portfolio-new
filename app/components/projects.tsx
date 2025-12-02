@@ -98,7 +98,7 @@ export default function Projects() {
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="group relative overflow-hidden rounded-2xl bg-zinc-800/50 border border-zinc-700/50 p-8 hover:border-purple-500/50 transition-colors duration-300"
+              className="group relative overflow-hidden rounded-2xl bg-zinc-800/50 border border-zinc-700/50 p-6 sm:p-8 hover:border-purple-500/50 transition-colors duration-300"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
@@ -171,7 +171,7 @@ export default function Projects() {
           {ecommerceProjects.map((project, index) => (
             <motion.div
               key={index}
-              className="group relative overflow-hidden rounded-2xl bg-zinc-800/50 border border-zinc-700/50 p-8 hover:border-emerald-500/50 transition-colors duration-300"
+              className="group relative overflow-hidden rounded-2xl bg-zinc-800/50 border border-zinc-700/50 p-6 sm:p-8 hover:border-emerald-500/50 transition-colors duration-300"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.6 + (index * 0.2) }}
