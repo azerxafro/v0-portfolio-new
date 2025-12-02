@@ -9,9 +9,9 @@ export default function Footer() {
             <Image
               src="/logo-small.png"
               alt="Ashwin Azer"
-              width={32}
-              height={32}
-              className="h-8 w-auto"
+              width={48}
+              height={48}
+              className="h-12 w-auto"
             />
             <p className="text-sm text-text-secondary">© {new Date().getFullYear()} Ashwin Azer. All rights reserved.</p>
           </div>

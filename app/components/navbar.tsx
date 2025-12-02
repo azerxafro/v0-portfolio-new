@@ -49,9 +49,9 @@ export default function Navbar() {
               <Image 
                 src="/logo-small.png" 
                 alt="Ashwin Azer" 
-                width={48}
-                height={48}
-                className="h-12 w-auto transition-transform duration-300 group-hover:scale-110"
+                width={64}
+                height={64}
+                className="h-16 w-auto transition-transform duration-300 group-hover:scale-110"
               />
               <span className="hidden sm:block text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
                 Ashwin Azer
