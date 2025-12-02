@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <div className="flex items-center gap-2">
             <Image
-              src="/logo-small.png"
+              src="/header-footer-logo.png"
               alt="Ashwin Azer"
               width={48}
               height={48}
