@@ -54,8 +54,8 @@ export default function Hero() {
         this.y = Math.random() * canvas.height
         this.baseSize = Math.random() * 2 + 0.5
         this.size = this.baseSize
-        this.speedX = (Math.random() - 0.5) * 1.5
-        this.speedY = (Math.random() - 0.5) * 1.5
+        this.speedX = (Math.random() - 0.5) * 4
+        this.speedY = (Math.random() - 0.5) * 4
         this.originalSpeedX = this.speedX
         this.originalSpeedY = this.speedY
 
@@ -83,11 +83,11 @@ export default function Hero() {
           const dx = this.x - mouseX
           const dy = this.y - mouseY
           const distance = Math.sqrt(dx * dx + dy * dy)
-          const repulsionRadius = 150 // Radius of influence
+          const repulsionRadius = 250 // Radius of influence
 
           if (distance < repulsionRadius) {
             // Calculate repulsion force (stronger when closer)
-            const force = (1 - distance / repulsionRadius) * 5
+            const force = (1 - distance / repulsionRadius) * 20
 
             // Normalize direction vector
             const angle = Math.atan2(dy, dx)
