@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Music as MusicIcon, Play, Mic2, Disc, Headphones } from "lucide-react"
+import { Music as MusicIcon, Play, Mic2, Disc, Headphones, Youtube } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 export default function Music() {
@@ -45,20 +45,43 @@ export default function Music() {
   ]
 
   const platforms = [
-    { name: "Apple Music", url: "https://music.apple.com/in/artist/ashwin-azer/1526462423" },
-    { name: "JioSaavn", url: "https://www.jiosaavn.com/artist/ashwin-azer/R,u7V5F4o,U_" },
-    { name: "Deezer", url: "https://www.deezer.com/en/artist/16120121" },
-    { name: "Boomplay", url: "https://www.boomplay.com/artists/1659918" },
+    { name: "Apple Music", url: "https://music.apple.com/in/artist/ashwin-azer/1526462423", icon: <Headphones className="h-4 w-4" /> },
+    { name: "JioSaavn", url: "https://www.jiosaavn.com/artist/ashwin-azer/R,u7V5F4o,U_", icon: <Headphones className="h-4 w-4" /> },
+    { name: "Deezer", url: "https://www.deezer.com/en/artist/16120121", icon: <Headphones className="h-4 w-4" /> },
+    { name: "Boomplay", url: "https://www.boomplay.com/artists/1659918", icon: <Headphones className="h-4 w-4" /> },
+    { name: "YouTube", url: "https://youtube.com/c/ashwinazer", icon: <Youtube className="h-4 w-4" /> },
   ]
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        stiffness: 100,
+        damping: 10,
+      },
+    },
+  }
 
   return (
     <section id="music" className="py-20 bg-black">
       <div ref={ref} className="container mx-auto px-4">
         <motion.div
           className="mb-16 text-center"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="flex items-center justify-center gap-2 mb-4">
             <MusicIcon className="h-8 w-8 text-purple-500" />
@@ -71,29 +94,33 @@ export default function Music() {
           </p>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-16">
+        <motion.div
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {tracks.map((track, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              variants={itemVariants}
+              whileHover={{ y: -10, transition: { duration: 0.2 } }}
             >
               <a
                 href={track.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group relative overflow-hidden rounded-xl bg-zinc-900/80 border border-zinc-800 p-6 hover:bg-zinc-800/80 transition-all duration-300 hover:-translate-y-1 h-full"
+                className="block group relative overflow-hidden rounded-xl bg-zinc-900/80 border border-zinc-800 p-6 hover:bg-zinc-800/80 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 h-full"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-900/20 text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-900/20 text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300">
                   <Disc className="h-6 w-6" />
                 </div>
-                <h3 className="mb-1 text-lg font-bold text-white">{track.title}</h3>
+                <h3 className="mb-1 text-lg font-bold text-white group-hover:text-purple-400 transition-colors">{track.title}</h3>
                 <p className="mb-3 text-sm text-purple-400">{track.role}</p>
                 <p className="mb-4 text-xs text-zinc-400 line-clamp-2">{track.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {track.tags.map((tag, i) => (
-                    <Badge key={i} variant="outline" className="border-zinc-700 text-zinc-400 text-[10px]">
+                    <Badge key={i} variant="outline" className="border-zinc-700 text-zinc-400 text-[10px] group-hover:border-purple-500/30 transition-colors">
                       {tag}
                     </Badge>
                   ))}
@@ -101,13 +128,14 @@ export default function Music() {
               </a>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div
           className="rounded-2xl bg-gradient-to-r from-purple-900/20 to-pink-900/20 p-8 border border-purple-500/20 backdrop-blur-sm"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
+          whileHover={{ scale: 1.01, transition: { duration: 0.3 } }}
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
@@ -116,16 +144,18 @@ export default function Music() {
             </div>
             <div className="flex flex-wrap justify-center gap-4">
               {platforms.map((platform, index) => (
-                <a
+                <motion.a
                   key={index}
                   href={platform.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-full bg-zinc-800 px-6 py-3 text-sm font-medium text-white hover:bg-purple-600 transition-colors"
+                  className="flex items-center gap-2 rounded-full bg-zinc-800 px-6 py-3 text-sm font-medium text-white hover:bg-purple-600 transition-colors border border-transparent hover:border-purple-400/50"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Headphones className="h-4 w-4" />
+                  {platform.icon}
                   {platform.name}
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
