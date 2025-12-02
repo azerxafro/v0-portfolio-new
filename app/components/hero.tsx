@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowRight } from "lucide-react"
+import Image from "next/image"
 
 interface Particle {
   x: number
@@ -287,9 +288,26 @@ export default function Hero() {
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full bg-black" />
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
         <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mb-8"
+        >
+          <div className="relative w-48 h-48 sm:w-64 sm:h-64 mx-auto">
+            <Image
+              src="/logo.png"
+              alt="Ashwin Azer Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-4"
         >
           <p className="text-xl sm:text-2xl text-gray-300 mb-2">Hello, I&apos;m</p>
